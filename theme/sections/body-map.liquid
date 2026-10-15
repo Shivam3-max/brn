@@ -1,0 +1,47 @@
+<section class="sec bmap" data-bodymap>
+  <div class="wrap bmap__grid">
+    <div class="bmap__intro rv">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2">{{ section.settings.title }}</h2>
+      <p class="sec__sub">{{ section.settings.sub }}</p>
+      <div class="bmap__list" role="tablist" aria-label="Concerns">
+        {%- for c in metaobjects.concern.values -%}
+          <button type="button" role="tab" class="bmap__pick" data-zone-pick="{{ c.system.handle }}" style="--pc:{{ c.colour.value }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ c.short.value }}</button>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="bmap__fig">{% render 'body-figure', interactive: true %}</div>
+    <div class="bmap__cards">
+      {%- for c in metaobjects.concern.values -%}
+        <article class="bcard" data-zone-card="{{ c.system.handle }}" style="--pc:{{ c.colour.value }}" {% unless forloop.first %}hidden{% endunless %}>
+          <div class="bcard__head"><span class="bcard__icon">{% render 'art', key: c.icon.value, class: 'ink' %}</span><p class="eyebrow">{{ c.title.value }}</p></div>
+          <p class="bcard__feel">“{{ c.feel.value }}”</p>
+          <ul class="bcard__signs">
+            {%- for s in c.signs.value limit: 4 -%}<li>{% render 'art', key: s[0], class: 'ink' %}<span>{{ s[1] }}</span></li>{%- endfor -%}
+          </ul>
+          <div class="bcard__prods">
+            {%- for p in c.products.value limit: 3 -%}
+              <div class="mini" style="--pc:{{ p.metafields.brn.colour.value }}">
+                <a href="{{ p.url }}" class="mini__pack">{% render 'pack-art', product: p %}</a>
+                <a href="{{ p.url }}" class="mini__t">{{ p.title }}<small>{{ p.selected_or_first_available_variant.price | money }}</small></a>
+                <button type="button" class="iconbtn iconbtn--line" data-add="{{ p.selected_or_first_available_variant.id }}" aria-label="Add {{ p.title | escape }}">{% render 'icon', name: 'plus', size: 16 %}</button>
+              </div>
+            {%- endfor -%}
+          </div>
+          <a class="bcard__more" href="{{ c.system.url }}">Read the full {{ c.short.value | downcase }} story {% render 'icon', name: 'arrow', size: 14 %}</a>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Body map",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Body map" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Tap where it bothers you." },
+    { "type": "text", "id": "sub", "label": "Subheading", "default": "Don't know the product name? You don't need to. Start with where you feel it." }
+  ],
+  "presets": [ { "name": "Body map" } ]
+}
+{% endschema %}

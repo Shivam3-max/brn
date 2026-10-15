@@ -1,0 +1,40 @@
+<section class="sec proofpage">
+  <div class="wrap proofpage__grid">
+    <div class="rv">{% render 'proof-form', id: 'page' %}</div>
+    <div class="proofpage__find rv">
+      <p class="eyebrow">Where is my batch number?</p>
+      <div class="proofpage__bottle" aria-hidden="true">
+        {% render 'art', key: 'j-bottle', class: 'ink' %}
+        <span class="proofpage__tag">Batch No. · Mfg · Exp</span>
+      </div>
+      <p>It's printed on the side or the bottom of every BRN pack, next to the manufacturing and expiry dates.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="tests">
+      {%- for block in section.blocks -%}
+        <div class="test rv" style="--d:{{ forloop.index0 | times: 80 }}ms" {{ block.shopify_attributes }}>
+          <span class="test__art">{% render 'art', key: block.settings.art, class: 'ink' %}</span>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Bare Proof",
+  "blocks": [ { "type": "test", "name": "What we test", "settings": [
+    { "type": "text", "id": "art", "label": "Drawing key", "default": "m-flask" },
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "textarea", "id": "text", "label": "Text" }
+  ] } ],
+  "presets": [ { "name": "Bare Proof", "blocks": [
+    { "type": "test", "settings": { "art": "m-proof", "title": "Identity", "text": "Is each ingredient what the label says it is?" } },
+    { "type": "test", "settings": { "art": "m-flask", "title": "Strength", "text": "Does each serving carry the dose printed on the label?" } },
+    { "type": "test", "settings": { "art": "m-shield", "title": "Purity", "text": "Heavy metals and microbes checked against FSSAI limits." } },
+    { "type": "test", "settings": { "art": "m-leaf", "title": "Nothing extra", "text": "No banned substances, no undeclared fillers." } }
+  ] } ]
+}
+{% endschema %}

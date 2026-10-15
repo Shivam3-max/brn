@@ -1,0 +1,14 @@
+<section class="sec blogm" data-blog>
+  <div class="wrap">
+    <div class="filters" data-blog-filter>
+      <button type="button" class="chip is-on" data-tag="all">All</button>
+      {%- for c in metaobjects.concern.values -%}<button type="button" class="chip" data-tag="{{ c.system.handle }}" style="--pc:{{ c.colour.value }}">{{ c.short.value }}</button>{%- endfor -%}
+    </div>
+    <div class="learn__grid learn__grid--blog">
+      {%- for a in blog.articles -%}<div data-tags="{{ a.tags | join: ' ' }}">{% render 'article-card', article: a %}</div>{%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Blog", "settings": [] }
+{% endschema %}

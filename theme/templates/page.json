@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "BRN",
+        "title": "Page",
+        "sub": "",
+        "art": "m-root",
+        "colour": "#4F6F3A"
+      }
+    }
+  },
+  "order": [
+    "hero"
+  ]
+}

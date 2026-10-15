@@ -1,0 +1,12 @@
+{%- comment -%} Bare Proof lookup. Batches are `batch` metaobjects; the report PDF is a file field. {%- endcomment -%}
+<form class="proof" data-proof action="/pages/bare-proof" method="get">
+  <label class="proof__label" for="proof-{{ id | default: 'home' }}">{% render 'art', key: 'm-proof', class: 'proof__art' %}<span><b>Bare Proof</b>Type the batch number printed on your bottle to see its lab report.</span></label>
+  <div class="proof__field">
+    <input id="proof-{{ id | default: 'home' }}" name="batch" type="text" placeholder="e.g. SAMPLE-MG-001" autocomplete="off" required data-proof-input>
+    <button type="submit" class="btn btn--ink btn--sm">Check batch</button>
+  </div>
+  <div class="proof__out" data-proof-out aria-live="polite"></div>
+  <script type="application/json" data-proof-data>
+    [{%- for b in metaobjects.batch.values -%}{ "code": {{ b.code.value | json }}, "product": {{ b.product.value.title | json }}, "url": {{ b.product.value.url | json }}, "colour": {{ b.product.value.metafields.brn.colour.value | json }}, "mfg": {{ b.mfg.value | json }}, "lab": {{ b.lab.value | json }}, "report": {% if b.report.value %}{{ b.report.value.url | json }}{% else %}null{% endif %}, "sample": {{ b.sample.value | json }} }{% unless forloop.last %},{% endunless %}{%- endfor -%}]
+  </script>
+</form>

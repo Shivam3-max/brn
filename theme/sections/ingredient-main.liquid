@@ -1,0 +1,30 @@
+{%- assign i = metaobject -%}
+{%- assign lead = i.products.value | first -%}
+<section class="ing" style="--pc:{{ lead.metafields.brn.colour.value | default: '#4F6F3A' }}">
+  <div class="wrap ing__grid">
+    <div class="ing__art" data-ink>{% render 'art', key: i.art.value, class: 'ink' %}<span class="ing__sym">{{ i.symbol.value }}</span></div>
+    <div class="ing__text">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/pages/ingredients">Ingredient library</a><span>/</span><span aria-current="page">{{ i.name.value }}</span></nav>
+      <p class="eyebrow">{{ i.kind.value }}</p>
+      <h1 class="h1">{{ i.name.value }}</h1>
+      <p class="ing__aka">{{ i.aka.value }}</p>
+      <dl class="ing__dl">
+        <div><dt>What it does</dt><dd>{{ i.does.value }}</dd></div>
+        <div><dt>You may be low if</dt><dd>{{ i.low.value }}</dd></div>
+        <div><dt>The story</dt><dd>{{ i.story.value }}</dd></div>
+      </dl>
+      <p class="note">Signs listed are common, not diagnostic. Talk to your doctor about a blood test if they persist.</p>
+    </div>
+  </div>
+</section>
+<section class="sec ing__in">
+  <div class="wrap">
+    <div class="sec__head"><p class="eyebrow">Find it in</p><h2 class="h2">BRN formulas with {{ i.name.value | downcase }}</h2></div>
+    <div class="cgrid__grid">
+      {%- for p in i.products.value -%}{% render 'product-card', product: p %}{%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Ingredient page", "settings": [] }
+{% endschema %}

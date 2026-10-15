@@ -1,0 +1,24 @@
+<section class="sec stacks">
+  <div class="wrap">
+    <div class="sec__head sec__head--row rv">
+      <div>
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2 class="h2">{{ section.settings.title }}</h2>
+      </div>
+      <a class="link-arrow" href="/pages/stacks">Build your own {% render 'icon', name: 'arrow', size: 16 %}</a>
+    </div>
+    <div class="stacks__grid">
+      {%- for s in metaobjects.stack.values -%}<div class="rv" style="--d:{{ forloop.index0 | times: 90 }}ms">{% render 'stack-card', stack: s %}</div>{%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Stacks",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Stacks" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Better together, and cheaper too." }
+  ],
+  "presets": [ { "name": "Stacks" } ]
+}
+{% endschema %}

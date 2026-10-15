@@ -1,0 +1,35 @@
+<section class="sec concerns" id="concerns">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2">{{ section.settings.title }}</h2>
+      <p class="sec__sub">{{ section.settings.sub }}</p>
+    </div>
+    <div class="concerns__grid">
+      {%- for c in metaobjects.concern.values -%}
+        <a class="ctile redraw rv" href="{{ c.system.url }}" style="--pc:{{ c.colour.value }};--d:{{ forloop.index0 | times: 60 }}ms">
+          <span class="ctile__icon">{% render 'art', key: c.icon.value, class: 'ink' %}</span>
+          <span class="ctile__title">{{ c.title.value }}</span>
+          <span class="ctile__feel">{{ c.feel.value }}</span>
+          <span class="ctile__count">{{ c.products.value.size }} {{ c.products.value.size | pluralize: 'product', 'products' }} {% render 'icon', name: 'arrow', size: 14 %}</span>
+        </a>
+      {%- endfor -%}
+      <a class="ctile ctile--map rv" href="/pages/body-map" style="--d:420ms">
+        <span class="ctile__icon">{% render 'body-figure' %}</span>
+        <span class="ctile__title">Not sure? Tap where it bothers you</span>
+        <span class="ctile__count">Open the body map {% render 'icon', name: 'arrow', size: 14 %}</span>
+      </a>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Concern tiles",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop by concern" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "What does your body need today?" },
+    { "type": "text", "id": "sub", "label": "Subheading", "default": "Start with how you feel. We'll show you what helps, and why." }
+  ],
+  "presets": [ { "name": "Concern tiles" } ]
+}
+{% endschema %}

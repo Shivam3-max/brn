@@ -1,0 +1,64 @@
+<footer class="ftr">
+  <div class="ftr__root" aria-hidden="true">{% render 'art', key: 'm-root' %}</div>
+  <div class="ftr__top wrap">
+    <div class="ftr__brand">
+      {% render 'logo', width: 120 %}
+      <p class="ftr__line">Bare labels. Rooted in Ayurveda. Every batch tested.</p>
+      {%- form 'customer', class: 'ftr__news' -%}
+        <label for="news-email" class="ftr__label">Get the launch offer and one useful health note a week</label>
+        <div class="ftr__field">
+          <input type="email" id="news-email" name="contact[email]" placeholder="Your email" required autocomplete="email">
+          <button type="submit" class="btn btn--ink btn--sm">Join</button>
+        </div>
+      {%- endform -%}
+      <div class="ftr__social">
+        {%- if settings.instagram != blank -%}<a href="{{ settings.instagram }}" aria-label="Instagram" target="_blank" rel="noopener">{% render 'icon', name: 'instagram' %}</a>{%- endif -%}
+        {%- if settings.youtube != blank -%}<a href="{{ settings.youtube }}" aria-label="YouTube" target="_blank" rel="noopener">{% render 'icon', name: 'youtube' %}</a>{%- endif -%}
+        {%- if settings.facebook != blank -%}<a href="{{ settings.facebook }}" aria-label="Facebook" target="_blank" rel="noopener">{% render 'icon', name: 'facebook' %}</a>{%- endif -%}
+      </div>
+    </div>
+    <div class="ftr__cols">
+      <div class="ftr__col">
+        <p class="ftr__h">Concerns</p>
+        {%- for c in metaobjects.concern.values -%}<a href="{{ c.system.url }}">{{ c.title.value }}</a>{%- endfor -%}
+      </div>
+      {%- assign menu_keys = section.settings.menus | split: ',' -%}
+      {%- for key in menu_keys -%}
+        {%- assign m = linklists[key] -%}
+        {%- if m -%}
+        <div class="ftr__col">
+          <p class="ftr__h">{{ m.title }}</p>
+          {%- for link in m.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+        </div>
+        {%- endif -%}
+      {%- endfor -%}
+      <div class="ftr__col ftr__contact">
+        <p class="ftr__h">Talk to us</p>
+        {%- if settings.phone != blank -%}<a href="tel:{{ settings.phone | remove: ' ' }}">{% render 'icon', name: 'phone', size: 16 %}{{ settings.phone }}</a>{%- endif -%}
+        {%- if settings.whatsapp != blank -%}<a href="https://wa.me/{{ settings.whatsapp }}" target="_blank" rel="noopener">{% render 'icon', name: 'whatsapp', size: 16 %}WhatsApp</a>{%- endif -%}
+        {%- if settings.email != blank -%}<a href="mailto:{{ settings.email }}">{% render 'icon', name: 'mail', size: 16 %}{{ settings.email }}</a>{%- endif -%}
+        {%- if settings.address != blank -%}<p>{% render 'icon', name: 'pin', size: 16 %}{{ settings.address }}</p>{%- endif -%}
+        {%- if settings.phone == blank and settings.email == blank and settings.show_placeholders -%}<p class="ph-note">Phone, WhatsApp, email and address appear here once added in Theme settings → Contact &amp; legal.</p>{%- endif -%}
+      </div>
+    </div>
+  </div>
+  <div class="ftr__trust wrap">
+    <span>{% render 'icon', name: 'shield', size: 18 %}FSSAI licensed{% if settings.fssai != blank %} · {{ settings.fssai }}{% endif %}</span>
+    <span>{% render 'icon', name: 'flask', size: 18 %}Every batch lab-tested</span>
+    <span>{% render 'icon', name: 'leaf', size: 18 %}Vegetarian</span>
+    <span>{% render 'icon', name: 'truck', size: 18 %}Cash on delivery</span>
+    <span>{% render 'art', key: 'm-factory', class: 'ftr__fac' %}Made in Paonta Sahib, Himachal Pradesh</span>
+  </div>
+  <div class="ftr__legal wrap">
+    <p>These statements have not been evaluated as medical claims. BRN products are food supplements, not medicines, and are not intended to diagnose, treat, cure or prevent any disease. Consult your doctor if you are pregnant, nursing, on medication or have a medical condition.</p>
+    <p>{{ settings.legal_line }} · © {{ 'now' | date: '%Y' }} BRN · Bare Root Nutrition</p>
+  </div>
+</footer>
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "menus", "label": "Menu handles (comma separated)", "default": "footer-shop,footer-learn,footer-help" }
+  ]
+}
+{% endschema %}

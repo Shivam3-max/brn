@@ -1,0 +1,59 @@
+{%- comment -%}
+  Inside the bottle. Auto-plays through every product: the pack sits in the
+  middle and its ingredients light up one by one, each drawn in, with what it
+  does and the signs you may be low in it. Tap a product to jump, tap an
+  ingredient to stop on it.
+{%- endcomment -%}
+{%- assign list = section.settings.collection.products | default: collections.all.products -%}
+{%- assign first = list | first -%}
+<section class="sec story" data-story>
+  <div class="wrap">
+    <div class="sec__head sec__head--center rv">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2">{{ section.settings.title }}</h2>
+      <p class="sec__sub">{{ section.settings.sub }}</p>
+    </div>
+    <div class="story__grid">
+      <div class="story__tabs" role="tablist" aria-label="Products">
+        {%- for p in list -%}
+          <button type="button" role="tab" class="story__tab" data-story-tab="{{ p.handle }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" style="--pc:{{ p.metafields.brn.colour.value }}">
+            <i aria-hidden="true"></i><span>{{ p.title }}<small>{{ p.metafields.brn.concern.value.short.value }}</small></span>
+          </button>
+        {%- endfor -%}
+      </div>
+      <div class="story__stage">
+        {%- for p in list -%}{% render 'story-stage', product: p, active: forloop.first %}{%- endfor -%}
+      </div>
+      <div class="story__cap" data-story-cap aria-live="polite">
+        <p class="story__step" data-cap-step>{{ first.metafields.brn.formula.value.size }} key ingredients</p>
+        <h3 class="story__name" data-cap-name>{{ first.title }}</h3>
+        <p class="story__aka" data-cap-aka>{{ first.metafields.brn.tagline.value }}</p>
+        <p class="dose" data-cap-dose hidden></p>
+        <dl class="story__dl">
+          <div data-cap-does-wrap><dt>What it does</dt><dd data-cap-does>{{ first.metafields.brn.made_for.value }}</dd></div>
+          <div data-cap-low-wrap hidden><dt>You may be low if</dt><dd data-cap-low></dd></div>
+        </dl>
+        <a class="story__more" data-cap-link href="{{ first.url }}">See the product {% render 'icon', name: 'arrow', size: 14 %}</a>
+        <div class="story__buy">
+          <button type="button" class="btn btn--ink btn--sm" data-cap-add="{{ first.selected_or_first_available_variant.id }}">Add <span data-cap-title>{{ first.title }}</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="story__bar">
+      <div class="story__segs" data-story-segs></div>
+      <button type="button" class="btn btn--ghost btn--sm" data-story-toggle aria-pressed="false">{% render 'icon', name: 'pause', size: 14 %}<span>Pause</span></button>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Story player",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Inside the bottle" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Open any bottle. See why it works." },
+    { "type": "text", "id": "sub", "label": "Subheading", "default": "Every ingredient, what it does, and the signs you may be running low. It plays on its own; tap anything to stop." },
+    { "type": "collection", "id": "collection", "label": "Products", "default": "all" }
+  ],
+  "presets": [ { "name": "Story player" } ]
+}
+{% endschema %}

@@ -1,0 +1,54 @@
+{%- comment -%} The origin story as one path that draws itself as you scroll, with five stops. {%- endcomment -%}
+<section class="sec rtb" data-rtb>
+  <div class="wrap">
+    <div class="sec__head sec__head--center rv">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2">{{ section.settings.title }}</h2>
+      <p class="sec__sub">{{ section.settings.sub }}</p>
+    </div>
+    <div class="rtb__track">
+      <svg class="rtb__path" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
+        <path pathLength="1" data-rtb-path d="M20 110 C140 20 220 200 340 110 S540 20 600 110 S800 200 860 110 S1060 20 1180 110"/>
+      </svg>
+      <ol class="rtb__steps">
+        {%- for block in section.blocks -%}
+          <li class="rtb__step rv" style="--d:{{ forloop.index0 | times: 120 }}ms" {{ block.shopify_attributes }}>
+            <span class="rtb__art">{% render 'art', key: block.settings.art, class: 'ink' %}</span>
+            <span class="rtb__n">{{ forloop.index }}</span>
+            <h3 class="rtb__t">{{ block.settings.title }}</h3>
+            <p class="rtb__d">{{ block.settings.text }}</p>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+    {%- if section.settings.show_film -%}
+    <div class="rtb__film rv">
+      {% render 'video-slot', video: section.settings.video, label: 'Factory film', spec: '16:9 · 60–90 s', ratio: '16/9', colour: '#4F6F3A', art: 'm-factory', title: 'Inside Nimai Lifesciences, Paonta Sahib' %}
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Root to bottle",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Root to bottle" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "A real manufacturer. Not a white label." },
+    { "type": "text", "id": "sub", "label": "Subheading", "default": "BRN is made by Nimai Lifesciences in our own facility at Paonta Sahib, in the Himalayan foothills. Here is the journey every bottle takes." },
+    { "type": "checkbox", "id": "show_film", "label": "Show factory film", "default": true },
+    { "type": "video", "id": "video", "label": "Factory film" }
+  ],
+  "blocks": [ { "type": "step", "name": "Step", "settings": [
+    { "type": "text", "id": "art", "label": "Drawing key", "default": "j-seed" },
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "textarea", "id": "text", "label": "Text" }
+  ] } ],
+  "presets": [ { "name": "Root to bottle", "blocks": [
+    { "type": "step", "settings": { "art": "j-seed", "title": "Chosen at the root", "text": "Herbs picked for the part that works: kutki root, tulsi leaf, milk thistle seed." } },
+    { "type": "step", "settings": { "art": "j-farm", "title": "Grown and sourced", "text": "Himalayan and Indian farms we can name, and minerals in the forms the body absorbs." } },
+    { "type": "step", "settings": { "art": "j-extract", "title": "Extracted and standardised", "text": "Extracts measured to a set strength, so every batch carries the same dose." } },
+    { "type": "step", "settings": { "art": "j-lab", "title": "Tested, batch by batch", "text": "Identity, purity and heavy metals checked before anything is bottled." } },
+    { "type": "step", "settings": { "art": "j-bottle", "title": "Bottled at Nimai", "text": "Packed in our own GMP facility at Paonta Sahib, with the batch number on every bottle." } }
+  ] } ]
+}
+{% endschema %}

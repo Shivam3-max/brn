@@ -1,0 +1,19 @@
+{%- assign b = product.metafields.brn -%}
+<section class="sec pfaq" style="--pc:{{ b.colour.value }}">
+  <div class="wrap faq__grid">
+    <div class="faq__intro rv">
+      <p class="eyebrow">Questions</p>
+      <h2 class="h2">About {{ product.title }}</h2>
+      <a class="link-arrow" href="/pages/faq">All questions {% render 'icon', name: 'arrow', size: 14 %}</a>
+    </div>
+    <div class="faq__list">
+      {%- for f in b.faq.value -%}
+        <details class="qa rv"{% if forloop.first %} open{% endif %}><summary>{{ f.q }}<span class="qa__plus" aria-hidden="true"></span></summary><div class="qa__a"><p>{{ f.a }}</p></div></details>
+      {%- endfor -%}
+    </div>
+  </div>
+  <p class="wrap disclaimer">This product is a food supplement, not a medicine. It is not intended to diagnose, treat, cure or prevent any disease. Do not exceed the recommended serving. Keep out of reach of children. If you are pregnant, nursing, on medication or have a medical condition, consult your doctor before use.</p>
+</section>
+{% schema %}
+{ "name": "Product FAQ", "presets": [ { "name": "Product FAQ" } ] }
+{% endschema %}

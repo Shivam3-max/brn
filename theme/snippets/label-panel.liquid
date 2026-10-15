@@ -1,0 +1,29 @@
+{%- comment -%}
+  Supplement-facts panel, built from the product's formula metafield. Where a
+  dose has not been entered yet it says so, rather than inventing a number.
+  {% render 'label-panel', product: p %}
+{%- endcomment -%}
+{%- assign b = product.metafields.brn -%}
+<div class="facts" style="--pc:{{ b.colour.value }}">
+  <div class="facts__head">
+    <p class="facts__title">Supplement facts</p>
+    <p class="facts__serving"><span>Serving</span> {{ b.serving.value }}</p>
+    <p class="facts__serving"><span>Pack</span> {{ b.count.value }}</p>
+  </div>
+  <table class="facts__table">
+    <thead><tr><th scope="col">In each serving</th><th scope="col" class="num">Amount</th></tr></thead>
+    <tbody>
+      {%- for row in b.formula.value -%}
+        {%- assign ing = metaobjects.ingredient[row.i] -%}
+        <tr>
+          <td><a href="{{ ing.system.url }}">{{ ing.name.value }}</a><small>{{ ing.aka.value }}</small></td>
+          <td class="num">{% if row.dose != blank %}{{ row.dose }}{% else %}<span class="tbc">on final label</span>{% endif %}</td>
+        </tr>
+      {%- endfor -%}
+    </tbody>
+  </table>
+  <ul class="facts__not">
+    {%- for x in b.not_inside.value -%}<li>{% render 'icon', name: 'check', size: 14 %}{{ x }}</li>{%- endfor -%}
+  </ul>
+  <p class="facts__foot">Not for medicinal use. This product is not intended to diagnose, treat, cure or prevent any disease.</p>
+</div>

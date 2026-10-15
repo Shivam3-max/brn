@@ -1,0 +1,30 @@
+{%- comment -%} Signs self-check: tick what you feel, get a plain suggestion. No sign-up, nothing stored. {%- endcomment -%}
+{%- assign concern = metaobjects.concern[collection.handle] -%}
+{%- if concern -%}
+{%- assign lead = concern.products.value | first -%}
+<section class="sec ccheck" id="check" style="--pc:{{ concern.colour.value }}">
+  <div class="wrap ccheck__grid">
+    <div class="ccheck__inside rv">
+      <p class="eyebrow">What's going on inside</p>
+      <h2 class="h2">{{ concern.title.value }}, explained.</h2>
+      <p class="ccheck__explain">{{ concern.explain.value }}</p>
+      <div class="ccheck__fig">{% render 'body-figure', only: concern.system.handle %}</div>
+    </div>
+    <div class="ccheck__box rv" data-selfcheck data-lead="{{ lead.title | escape }}" data-url="{{ lead.url }}" data-variant="{{ lead.selected_or_first_available_variant.id }}">
+      <p class="eyebrow">Signs self-check</p>
+      <p class="ccheck__q">Tick what sounds like you.</p>
+      <div class="ccheck__list">
+        {%- for s in concern.signs.value -%}
+          <label class="tick"><input type="checkbox" id="sign-{{ forloop.index }}" value="{{ forloop.index }}"><span class="tick__art">{% render 'art', key: s[0] %}</span><span>{{ s[1] }}</span><i aria-hidden="true">{% render 'icon', name: 'check', size: 16 %}</i></label>
+        {%- endfor -%}
+      </div>
+      <div class="ccheck__out" data-selfcheck-out aria-live="polite">
+        <p>Tick one or more to see what may help.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{% schema %}
+{ "name": "Signs self-check", "settings": [] }
+{% endschema %}

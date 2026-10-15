@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-cart"
+    },
+    "stacks": {
+      "type": "stacks"
+    }
+  },
+  "order": [
+    "main",
+    "stacks"
+  ]
+}

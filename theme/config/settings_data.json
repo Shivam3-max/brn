@@ -1,0 +1,68 @@
+{
+  "current": {
+    "logo": null,
+    "logo_width": 96,
+    "colour_ink": "#403322",
+    "colour_accent": "#4F6F3A",
+    "show_placeholders": true,
+    "announcements": "Launch offer: flat 15% off your first order with code ROOT15|/collections/all\nFree delivery on prepaid orders above ₹799|/collections/all\nCheck the lab report for your bottle on Bare Proof|/pages/bare-proof",
+    "free_ship_threshold": 799,
+    "phone": "",
+    "whatsapp": "",
+    "email": "",
+    "address": "",
+    "fssai": "",
+    "legal_line": "Marketed and manufactured by Nimai Lifesciences, Paonta Sahib, Himachal Pradesh",
+    "instagram": "",
+    "youtube": "",
+    "facebook": "",
+    "enable_webgl": true,
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu"
+        },
+        "blocks": {
+          "tab_1": {
+            "type": "tab",
+            "settings": {
+              "label": "Wellness",
+              "link": "/collections/all"
+            }
+          },
+          "tab_2": {
+            "type": "tab",
+            "settings": {
+              "label": "Sports Nutrition",
+              "link": "/collections/sports-nutrition"
+            }
+          },
+          "tab_3": {
+            "type": "tab",
+            "settings": {
+              "label": "Ayurveda",
+              "link": "/collections/ayurveda"
+            }
+          }
+        },
+        "block_order": [
+          "tab_1",
+          "tab_2",
+          "tab_3"
+        ]
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "menus": "footer-shop,footer-learn,footer-help"
+        }
+      },
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {}
+      }
+    }
+  },
+  "presets": {}
+}

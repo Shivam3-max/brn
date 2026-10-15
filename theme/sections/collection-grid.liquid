@@ -1,0 +1,26 @@
+<section class="sec cgrid" id="products">
+  <div class="wrap">
+    <div class="sec__head sec__head--row">
+      <div><p class="eyebrow">{{ collection.products_count }} {{ collection.products_count | pluralize: 'formula', 'formulas' }}</p><h2 class="h2">{% if collection.handle == 'all' %}The whole range{% else %}Made for this{% endif %}</h2></div>
+    </div>
+    <div class="filters" data-filter-group data-filter-key="{% if collection.handle == 'all' %}concerns{% else %}format{% endif %}">
+      <button type="button" class="chip is-on" data-filter="all">All</button>
+      {%- if collection.handle == 'all' -%}
+        {%- for c in metaobjects.concern.values -%}<button type="button" class="chip" data-filter="{{ c.system.handle }}" style="--pc:{{ c.colour.value }}">{{ c.short.value }}</button>{%- endfor -%}
+      {%- else -%}
+        <button type="button" class="chip" data-filter="tablets">Tablets</button>
+        <button type="button" class="chip" data-filter="capsules">Capsules</button>
+        <button type="button" class="chip" data-filter="powder">Powder</button>
+      {%- endif -%}
+    </div>
+    <div class="cgrid__grid">
+      {%- paginate collection.products by 24 -%}
+        {%- for p in collection.products -%}{% render 'product-card', product: p, class: 'rv' %}{%- endfor -%}
+      {%- endpaginate -%}
+    </div>
+    <p class="cgrid__empty" data-filter-empty hidden>Nothing in this format here yet. <button type="button" class="link-arrow" data-filter-reset>Show all</button></p>
+  </div>
+</section>
+{% schema %}
+{ "name": "Product grid", "settings": [] }
+{% endschema %}

@@ -1,0 +1,24 @@
+<section class="phero" style="--pc:{{ section.settings.colour }}">
+  <div class="wrap phero__grid">
+    <div class="phero__text">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span aria-current="page">{{ page.title | default: section.settings.title }}</span></nav>
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1 class="h1">{{ section.settings.title }}</h1>
+      {%- if section.settings.sub != blank -%}<p class="phero__sub">{{ section.settings.sub }}</p>{%- endif -%}
+    </div>
+    <span class="phero__art" data-ink aria-hidden="true">{% render 'art', key: section.settings.art, class: 'ink' %}</span>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Page hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "BRN" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Page title" },
+    { "type": "textarea", "id": "sub", "label": "Subheading" },
+    { "type": "text", "id": "art", "label": "Drawing key", "default": "m-root" },
+    { "type": "color", "id": "colour", "label": "Colour", "default": "#4F6F3A" }
+  ],
+  "presets": [ { "name": "Page hero" } ]
+}
+{% endschema %}

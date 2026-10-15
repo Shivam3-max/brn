@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Body map",
+        "title": "Tap where it bothers you.",
+        "sub": "Start with where you feel it. We will show you what may help, and why.",
+        "art": "c-joint",
+        "colour": "#D47524"
+      }
+    },
+    "map": {
+      "type": "body-map"
+    },
+    "quiz": {
+      "type": "quiz-section"
+    }
+  },
+  "order": [
+    "hero",
+    "map",
+    "quiz"
+  ]
+}

@@ -1,0 +1,25 @@
+{%- assign concern = metaobjects.concern[collection.handle] -%}
+{%- if concern and concern.stack.value -%}
+{%- assign lead = concern.products.value | first -%}
+<section class="sec cstack sec--tint">
+  <div class="wrap cstack__grid">
+    <div class="rv">
+      <p class="eyebrow">Inside {{ lead.title }}</p>
+      <h2 class="h2">See what each ingredient does.</h2>
+      <p class="sec__sub">Tap around the bottle. Every ingredient, with what it does and the signs you may be low.</p>
+      <div class="cstack__stage" data-story>
+        {% render 'story-stage', product: lead, active: true %}
+        {% render 'story-caption', product: lead, hide_buy: true %}
+        <div class="story__bar" hidden><div class="story__segs" data-story-segs></div><button type="button" data-story-toggle><svg></svg><span>Pause</span></button></div>
+      </div>
+    </div>
+    <div class="rv" style="--d:120ms">
+      <p class="eyebrow">Save with the stack</p>
+      {% render 'stack-card', stack: concern.stack.value %}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{% schema %}
+{ "name": "Concern stack", "settings": [] }
+{% endschema %}

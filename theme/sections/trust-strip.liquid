@@ -1,0 +1,11 @@
+<section class="trust">
+  <div class="wrap trust__row">
+    <div class="trust__item">{% render 'art', key: 'm-flask', class: 'trust__art' %}<span><b>Every batch tested</b>Check yours on Bare Proof</span></div>
+    <div class="trust__item">{% render 'art', key: 'm-factory', class: 'trust__art' %}<span><b>Made in our own facility</b>Nimai Lifesciences, Himachal</span></div>
+    <div class="trust__item">{% render 'art', key: 'm-leaf', class: 'trust__art' %}<span><b>Ayurveda meets nutrition</b>Herbs and minerals, dosed</span></div>
+    <div class="trust__item">{% render 'art', key: 'm-truck', class: 'trust__art' %}<span><b>Cash on delivery</b>Free delivery above {{ settings.free_ship_threshold | times: 100 | money }}</span></div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Trust strip", "presets": [ { "name": "Trust strip" } ] }
+{% endschema %}

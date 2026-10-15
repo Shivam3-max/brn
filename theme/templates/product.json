@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": { "type": "main-product" },
+    "story": { "type": "product-story" },
+    "inside": { "type": "product-inside" },
+    "signs": { "type": "product-signs" },
+    "how": { "type": "product-how" },
+    "label": { "type": "product-label" },
+    "reels": { "type": "product-reels" },
+    "pairs": { "type": "product-pairs" },
+    "faq": { "type": "product-faq" }
+  },
+  "order": ["main", "story", "inside", "signs", "how", "label", "reels", "pairs", "faq"]
+}

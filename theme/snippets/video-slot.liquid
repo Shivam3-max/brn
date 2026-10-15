@@ -1,0 +1,23 @@
+{%- comment -%}
+  Video placeholder / player. With a video file it renders a poster-first,
+  muted, lazy player that only plays while on screen. Without one it renders
+  a designed poster with the slot's purpose and spec.
+
+  {% render 'video-slot', video: section.settings.video, label: '30-second story', spec: '16:9 · 30–45 s', ratio: '16/9', colour: c, art: 'i-tulsi', title: '…' %}
+{%- endcomment -%}
+{%- assign slot_art = art | default: 'm-root' -%}
+<div class="vslot {{ class }}{% if video %} vslot--filled{% endif %}" style="--ar:{{ ratio | default: '16/9' }};--pc:{{ colour | default: '#403322' }}">
+  {%- if video -%}
+    {{ video | video_tag: autoplay: false, loop: loop, muted: true, playsinline: true, controls: controls, preload: 'none', class: 'vslot__video' }}
+    <button type="button" class="vslot__play" data-vplay aria-label="Play video">{% render 'icon', name: 'play', size: 26 %}</button>
+  {%- else -%}
+    <div class="vslot__ph">
+      <span class="vslot__art" aria-hidden="true">{% render 'art', key: slot_art, class: 'ink' %}</span>
+      {%- if title -%}<span class="vslot__title">{{ title }}</span>{%- endif -%}
+      <span class="vslot__play" aria-hidden="true">{% render 'icon', name: 'play', size: 22 %}</span>
+      {%- if settings.show_placeholders -%}
+        <span class="vslot__label"><b>{{ label }}</b><span>{{ spec }} · upload in admin</span></span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>

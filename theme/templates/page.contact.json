@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Contact",
+        "title": "Talk to a person.",
+        "sub": "Questions about a product, an order or a batch report. We reply within a working day.",
+        "art": "m-leaf",
+        "colour": "#4F6F3A"
+      }
+    },
+    "contact": {
+      "type": "contact-main"
+    }
+  },
+  "order": [
+    "hero",
+    "contact"
+  ]
+}

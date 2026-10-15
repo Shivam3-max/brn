@@ -1,0 +1,38 @@
+{%- assign blog = blogs[section.settings.blog] | default: blogs.learn -%}
+<section class="sec learn">
+  <div class="wrap">
+    <div class="sec__head sec__head--row rv">
+      <div>
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2 class="h2">{{ section.settings.title }}</h2>
+      </div>
+      <a class="link-arrow" href="{{ blog.url }}">All articles {% render 'icon', name: 'arrow', size: 16 %}</a>
+    </div>
+    <div class="learn__grid">
+      {%- for a in blog.articles limit: 3 -%}{% render 'article-card', article: a %}{%- endfor -%}
+    </div>
+    <div class="lib rv">
+      <div class="lib__text">
+        <p class="eyebrow">Ingredient library</p>
+        <p class="lib__t">{{ metaobjects.ingredient.values.size }} ingredients, each with its own page: what it is, what it does, and the signs you may be low.</p>
+        <a class="btn btn--ghost btn--sm" href="/pages/ingredients">Open the library</a>
+      </div>
+      <div class="lib__chips">
+        {%- for i in metaobjects.ingredient.values limit: 14 -%}
+          <a class="ichip" href="{{ i.system.url }}">{% render 'art', key: i.art.value %}{{ i.name.value }}</a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Learn",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Learn" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Know what you take, and why." },
+    { "type": "text", "id": "blog", "label": "Blog handle", "default": "learn" }
+  ],
+  "presets": [ { "name": "Learn" } ]
+}
+{% endschema %}

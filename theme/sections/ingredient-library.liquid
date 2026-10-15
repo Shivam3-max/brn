@@ -1,0 +1,30 @@
+<section class="sec ilib" data-ilib>
+  <div class="wrap">
+    <div class="ilib__bar">
+      <div class="filters" data-ilib-filter>
+        <button type="button" class="chip is-on" data-kind="all">All {{ metaobjects.ingredient.values.size }}</button>
+        <button type="button" class="chip" data-kind="herb">Herbs</button>
+        <button type="button" class="chip" data-kind="vitamin">Vitamins</button>
+        <button type="button" class="chip" data-kind="mineral">Minerals</button>
+        <button type="button" class="chip" data-kind="nutrient">Nutrients</button>
+      </div>
+      <label class="ilib__search">{% render 'icon', name: 'search', size: 18 %}<input type="search" id="ilib-q" placeholder="Find an ingredient" data-ilib-q aria-label="Find an ingredient"></label>
+    </div>
+    <div class="ilib__grid">
+      {%- for i in metaobjects.ingredient.values -%}
+        {%- assign p = i.products.value | first -%}
+        <a class="icard redraw rv" href="{{ i.system.url }}" data-kind="{{ i.kind.value }}" data-name="{{ i.name.value | downcase }} {{ i.aka.value | downcase }}" style="--pc:{{ p.metafields.brn.colour.value | default: '#4F6F3A' }};--d:{{ forloop.index0 | modulo: 8 | times: 50 }}ms">
+          <span class="icard__art">{% render 'art', key: i.art.value, class: 'ink' %}</span>
+          <span class="icard__kind">{{ i.kind.value }}</span>
+          <span class="icard__n">{{ i.name.value }}</span>
+          <span class="icard__aka">{{ i.aka.value }}</span>
+          <span class="icard__in">In {% for q in i.products.value %}{{ q.title }}{% unless forloop.last %}, {% endunless %}{% endfor %}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+    <p class="cgrid__empty" data-ilib-empty hidden>No ingredient matches that. Try “magnesium” or “tulsi”.</p>
+  </div>
+</section>
+{% schema %}
+{ "name": "Ingredient library", "presets": [ { "name": "Ingredient library" } ] }
+{% endschema %}

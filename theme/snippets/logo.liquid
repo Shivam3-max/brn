@@ -1,0 +1,8 @@
+{%- assign lw = width | default: settings.logo_width | default: 96 -%}
+<a class="logo {{ class }}" href="/" aria-label="BRN · Bare Root Nutrition, home">
+  {%- if settings.logo -%}
+    <img src="{{ settings.logo | image_url: width: 400 }}" alt="BRN · Bare Root Nutrition" width="{{ lw }}" style="width:{{ lw }}px">
+  {%- else -%}
+    <img src="{{ 'logo.png' | asset_url }}" alt="BRN · Bare Root Nutrition" width="{{ lw }}" height="{{ lw | times: 365 | divided_by: 714 }}" style="width:{{ lw }}px">
+  {%- endif -%}
+</a>

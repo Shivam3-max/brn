@@ -1,0 +1,33 @@
+<section class="sec faq">
+  <div class="wrap faq__grid">
+    <div class="faq__intro rv">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2">{{ section.settings.title }}</h2>
+      <p class="sec__sub">{{ section.settings.sub }}</p>
+      <div class="faq__art" aria-hidden="true">{% render 'art', key: 'm-quiz', class: 'ink' %}</div>
+    </div>
+    <div class="faq__list">
+      {%- for block in section.blocks -%}
+        <details class="qa rv" {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.q }}<span class="qa__plus" aria-hidden="true"></span></summary>
+          <div class="qa__a">{{ block.settings.a }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FAQ" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Questions, answered." },
+    { "type": "text", "id": "sub", "label": "Subheading", "default": "Can't find yours? Write to us; a person replies." }
+  ],
+  "blocks": [ { "type": "qa", "name": "Question", "settings": [
+    { "type": "text", "id": "q", "label": "Question" },
+    { "type": "richtext", "id": "a", "label": "Answer" }
+  ] } ],
+  "presets": [ { "name": "FAQ" } ]
+}
+{% endschema %}

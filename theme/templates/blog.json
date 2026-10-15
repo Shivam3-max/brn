@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Learn",
+        "title": "Know what you take, and why.",
+        "sub": "Short, honest reads on nutrition, Ayurveda and the gaps Indian diets leave.",
+        "art": "i-bcomplex",
+        "colour": "#4F6F3A"
+      }
+    },
+    "main": {
+      "type": "blog-main"
+    }
+  },
+  "order": [
+    "hero",
+    "main"
+  ]
+}

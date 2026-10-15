@@ -1,0 +1,22 @@
+{%- assign c = article.metafields.brn.concern.value -%}
+{%- assign p = article.metafields.brn.product.value -%}
+{%- assign f = p.metafields.brn.formula.value | first -%}
+<article class="art-page" style="--pc:{{ c.colour.value }}">
+  <header class="art-page__head wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="{{ blog.url }}">Learn</a><span>/</span><a href="{{ c.system.url }}">{{ c.short.value }}</a></nav>
+    <h1 class="h1">{{ article.title }}</h1>
+    <p class="art-page__x">{{ article.excerpt }}</p>
+    <p class="acard__meta">{{ article.author }} · {{ article.published_at | date: '%d %b %Y' }} · {{ article.metafields.brn.read_minutes.value }} min read</p>
+  </header>
+  <div class="art-page__fig wrap" data-ink>{% render 'art', key: metaobjects.ingredient[f.i].art.value, class: 'ink' %}</div>
+  <div class="art-page__body wrap">
+    <div class="rte">{{ article.content }}</div>
+    <aside class="art-page__side">
+      <p class="eyebrow">Mentioned in this article</p>
+      {% render 'product-card', product: p %}
+    </aside>
+  </div>
+</article>
+{% schema %}
+{ "name": "Article", "settings": [] }
+{% endschema %}

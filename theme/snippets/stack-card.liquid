@@ -1,0 +1,30 @@
+{%- comment -%} A ready-made stack with its saving. {% render 'stack-card', stack: s %} {%- endcomment -%}
+{%- liquid
+  assign total = 0
+  assign ids = ''
+  for p in stack.products.value
+    assign total = total | plus: p.selected_or_first_available_variant.price
+    assign ids = ids | append: p.selected_or_first_available_variant.id | append: ','
+  endfor
+  assign off = total | times: stack.discount.value | divided_by: 100
+  assign now = total | minus: off
+-%}
+<article class="stack" style="--pc:{{ stack.colour.value }}">
+  <div class="stack__packs" aria-hidden="true">
+    {%- for p in stack.products.value -%}<span class="stack__pack" style="--i:{{ forloop.index0 }}">{% render 'pack-art', product: p %}</span>{%- endfor -%}
+  </div>
+  <div class="stack__body">
+    <p class="eyebrow">Save {{ stack.discount.value }}%</p>
+    <h3 class="stack__title">{{ stack.title.value }}</h3>
+    <p class="stack__line">{{ stack.line.value }}</p>
+    <ul class="stack__list">
+      {%- for p in stack.products.value -%}
+        <li style="--pc:{{ p.metafields.brn.colour.value }}"><a href="{{ p.url }}">{{ p.title }}</a><span>{{ p.selected_or_first_available_variant.price | money }}</span></li>
+      {%- endfor -%}
+    </ul>
+    <div class="stack__foot">
+      <div><span class="price">{{ now | money }}</span> <s class="price--was">{{ total | money }}</s></div>
+      <button type="button" class="btn btn--ink btn--sm" data-add-stack="{{ ids }}" data-stack-name="{{ stack.title.value | escape }}">Add stack</button>
+    </div>
+  </div>
+</article>

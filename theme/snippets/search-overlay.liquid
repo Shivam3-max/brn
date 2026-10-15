@@ -1,0 +1,18 @@
+<div class="search" data-panel="search" role="dialog" aria-modal="true" aria-label="Search" hidden>
+  <div class="search__inner wrap">
+    <form class="search__form" action="{{ routes.search_url }}" method="get" role="search">
+      {% render 'icon', name: 'search', size: 22 %}
+      <input type="search" name="q" id="search-q" placeholder="Search a product, a concern or an ingredient" autocomplete="off" aria-label="Search" data-search-input>
+      <button type="button" class="iconbtn" data-close aria-label="Close search">{% render 'icon', name: 'close' %}</button>
+    </form>
+    <div class="search__results" data-search-results>
+      <p class="eyebrow">Popular</p>
+      <div class="search__chips">
+        {%- for c in metaobjects.concern.values -%}<a class="chip" href="{{ c.system.url }}" style="--pc:{{ c.colour.value }}">{{ c.short.value }}</a>{%- endfor -%}
+        <a class="chip" href="/pages/ingredient/magnesium">Magnesium</a>
+        <a class="chip" href="/pages/ingredient/creatine">Creatine</a>
+        <a class="chip" href="/pages/ingredient/vitamin-b12">Vitamin B12</a>
+      </div>
+    </div>
+  </div>
+</div>

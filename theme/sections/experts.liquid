@@ -1,0 +1,33 @@
+<section class="sec experts">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2">{{ section.settings.title }}</h2>
+      <p class="sec__sub">{{ section.settings.sub }}</p>
+    </div>
+    <div class="experts__grid">
+      {%- for e in metaobjects.expert_answer.values -%}
+        {%- assign p = e.product.value -%}
+        <article class="xcard rv" style="--pc:{{ p.metafields.brn.colour.value }};--d:{{ forloop.index0 | times: 80 }}ms">
+          {%- assign first = p.metafields.brn.formula.value | first -%}
+          {% render 'video-slot', video: e.video.value, label: 'Expert answer', spec: '9:16 · ~30 s', ratio: '4/5', colour: p.metafields.brn.colour.value, art: metaobjects.ingredient[first.i].art.value %}
+          <h3 class="xcard__q">{{ e.question.value }}</h3>
+          <p class="xcard__a">{{ e.answer.value }}</p>
+          <p class="xcard__who">{{ e.who.value }} · <a href="{{ p.url }}">{{ p.title }}</a></p>
+        </article>
+      {%- endfor -%}
+    </div>
+    <p class="note">Reviews from verified buyers appear on each product page once orders start arriving. We never seed or edit reviews.</p>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Ask the experts",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Ask the experts" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Straight answers to the questions everyone asks." },
+    { "type": "text", "id": "sub", "label": "Subheading", "default": "Our nutrition team answers one question at a time, in plain words." }
+  ],
+  "presets": [ { "name": "Ask the experts" } ]
+}
+{% endschema %}

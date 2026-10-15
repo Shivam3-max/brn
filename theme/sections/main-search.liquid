@@ -1,0 +1,20 @@
+<section class="sec searchp">
+  <div class="wrap">
+    <h1 class="h1">{% if search.performed %}Results for “{{ search.terms | escape }}”{% else %}Search{% endif %}</h1>
+    <form class="search__form searchp__form" action="/search" method="get" role="search">
+      {% render 'icon', name: 'search', size: 22 %}<input type="search" name="q" id="searchp-q" value="{{ search.terms | escape }}" placeholder="Search a product, a concern or an ingredient" aria-label="Search">
+      <button type="submit" class="btn btn--ink btn--sm">Search</button>
+    </form>
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <div class="cgrid__grid">{%- for p in search.results -%}{% render 'product-card', product: p %}{%- endfor -%}</div>
+      {%- else -%}
+        <p class="sec__sub">Nothing matched. Try a concern instead:</p>
+        <div class="search__chips">{%- for c in metaobjects.concern.values -%}<a class="chip" href="{{ c.system.url }}" style="--pc:{{ c.colour.value }}">{{ c.short.value }}</a>{%- endfor -%}</div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

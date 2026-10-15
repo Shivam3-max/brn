@@ -1,0 +1,40 @@
+{%- comment -%} Read the Bare Label: a real facts panel per product, the "not inside" ticker and the Bare Proof batch lookup. {%- endcomment -%}
+{%- assign list = collections.all.products -%}
+<section class="sec bare" data-bare>
+  <div class="bare__ticker" aria-hidden="true">
+    <div class="bare__ticker-track">
+      {%- for i in (1..2) -%}
+        <span>No added sugar</span><span>No artificial colours</span><span>No hidden blends</span><span>No amino spiking</span><span>No gluten</span><span>No melatonin</span><span>No steroids</span><span>No banned substances</span>
+      {%- endfor -%}
+    </div>
+  </div>
+  <div class="wrap bare__grid">
+    <div class="bare__intro rv">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2">{{ section.settings.title }}</h2>
+      <p class="sec__sub">{{ section.settings.sub }}</p>
+      <div class="bare__tabs" role="tablist" aria-label="Choose a label">
+        {%- for p in list -%}
+          <button type="button" role="tab" class="chip{% if forloop.first %} is-on{% endif %}" data-label-tab="{{ p.handle }}" style="--pc:{{ p.metafields.brn.colour.value }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ p.title }}</button>
+        {%- endfor -%}
+      </div>
+      {% render 'proof-form' %}
+    </div>
+    <div class="bare__labels">
+      {%- for p in list -%}
+        <div data-label-panel="{{ p.handle }}" {% unless forloop.first %}hidden{% endunless %}>{% render 'label-panel', product: p %}</div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Read the Bare Label",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Read the Bare Label" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Every ingredient. Every dose. Nothing hidden." },
+    { "type": "text", "id": "sub", "label": "Subheading", "default": "No proprietary blends, no fairy-dusting. Pick a product and read its label the way we wrote it." }
+  ],
+  "presets": [ { "name": "Read the Bare Label" } ]
+}
+{% endschema %}

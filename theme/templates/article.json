@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "article-main"
+    },
+    "more": {
+      "type": "learn",
+      "settings": {
+        "eyebrow": "Keep reading",
+        "title": "More from Learn"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "more"
+  ]
+}

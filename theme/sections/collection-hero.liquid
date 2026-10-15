@@ -1,0 +1,44 @@
+{%- comment -%}
+  Concern hero (when a concern entry matches this collection's handle) or a
+  plain range hero for "who you are" and "shop all" collections.
+{%- endcomment -%}
+{%- assign concern = metaobjects.concern[collection.handle] -%}
+{%- if concern -%}
+<section class="chero" style="--pc:{{ concern.colour.value }}">
+  <div class="chero__gl" data-capsules data-colour="{{ concern.colour.value }}" aria-hidden="true"></div>
+  <div class="wrap chero__grid">
+    <div class="chero__text">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span aria-current="page">{{ concern.title.value }}</span></nav>
+      <p class="eyebrow">Concern</p>
+      <h1 class="h1">{{ concern.title.value }}</h1>
+      <p class="chero__hook">“{{ concern.hook.value }}”</p>
+      <p class="chero__feel">{{ concern.feel.value }}</p>
+      <div class="chero__cta">
+        <a class="btn btn--ink" href="#products">See {{ collection.products_count }} {{ collection.products_count | pluralize: 'product', 'products' }}</a>
+        <a class="btn btn--ghost" href="#check">Check your signs</a>
+      </div>
+    </div>
+    <div class="chero__vis">
+      <span class="chero__icon" data-ink>{% render 'art', key: concern.icon.value, class: 'ink' %}</span>
+      <div class="chero__video">{% render 'video-slot', video: concern.intro_video.value, label: 'Concern intro', spec: '16:9 loop · 6–10 s', ratio: '16/10', colour: concern.colour.value, art: concern.icon.value, title: concern.short.value %}</div>
+    </div>
+  </div>
+</section>
+{%- else -%}
+<section class="chero chero--plain">
+  <div class="wrap chero__grid">
+    <div class="chero__text">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span aria-current="page">{{ collection.title }}</span></nav>
+      <p class="eyebrow">{% if collection.metafields.brn.kind.value == 'audience' %}Made for{% else %}Shop{% endif %}</p>
+      <h1 class="h1">{{ collection.title }}</h1>
+      <p class="chero__feel">{{ collection.metafields.brn.line.value | default: collection.description }}</p>
+    </div>
+    <div class="chero__vis chero__vis--packs" aria-hidden="true">
+      {%- for p in collection.products limit: 4 -%}<span class="chero__pack" style="--i:{{ forloop.index0 }}">{% render 'pack-art', product: p %}</span>{%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{% schema %}
+{ "name": "Collection hero", "settings": [] }
+{% endschema %}

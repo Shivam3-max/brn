@@ -1,0 +1,30 @@
+{%- assign b = product.metafields.brn -%}
+<section class="sec preels" id="reviews" style="--pc:{{ b.colour.value }}">
+  <div class="wrap">
+    <div class="sec__head sec__head--row rv">
+      <div><p class="eyebrow">Watch & reviews</p><h2 class="h2">From people who take it.</h2></div>
+    </div>
+    <div class="preels__grid">
+      {%- for r in b.reels.value -%}{% render 'reel-card', reel: r %}{%- endfor -%}
+      {%- for i in (1..2) -%}
+        {%- assign first = b.formula.value | first -%}
+        <div class="reel reel--empty" style="--pc:{{ b.colour.value }}">
+          <span class="reel__poster" aria-hidden="true"><span class="reel__art">{% render 'art', key: metaobjects.ingredient[first.i].art.value %}</span></span>
+          <span class="reel__kind">Customer story</span>
+          <span class="reel__title">Your video review could be here</span>
+          {%- if settings.show_placeholders -%}<span class="reel__ph">Reel · 9:16 · upload in admin</span>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="reviews">
+      <div class="reviews__empty">
+        {% render 'art', key: 'm-shield', class: 'reviews__art' %}
+        <div><p class="reviews__t">Reviews from verified buyers appear here.</p><p class="reviews__s">We launched recently, so this space fills as orders arrive. We never seed, buy or edit reviews.</p></div>
+      </div>
+      {%- comment -%} Install a reviews app (Judge.me or similar) and add its app block here in the theme editor. {%- endcomment -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Reels + reviews", "blocks": [ { "type": "@app" } ], "presets": [ { "name": "Reels + reviews" } ] }
+{% endschema %}

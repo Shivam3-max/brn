@@ -1,0 +1,27 @@
+{%- assign concern = metaobjects.concern[collection.handle] -%}
+<section class="sec clearn">
+  <div class="wrap">
+    <div class="sec__head sec__head--row rv">
+      <div><p class="eyebrow">Learn</p><h2 class="h2">{% if concern %}Read up on {{ concern.short.value | downcase }}{% else %}Know what you take{% endif %}</h2></div>
+      <a class="link-arrow" href="/blogs/learn">All articles {% render 'icon', name: 'arrow', size: 14 %}</a>
+    </div>
+    <div class="learn__grid">
+      {%- assign shown = 0 -%}
+      {%- for a in blogs.learn.articles -%}
+        {%- if concern == nil or a.tags contains concern.system.handle -%}
+          {%- if shown < 3 -%}{% render 'article-card', article: a %}{%- assign shown = shown | plus: 1 -%}{%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if shown < 3 -%}
+        {%- for a in blogs.learn.articles -%}
+          {%- unless concern and a.tags contains concern.system.handle -%}
+            {%- if shown < 3 -%}{% render 'article-card', article: a %}{%- assign shown = shown | plus: 1 -%}{%- endif -%}
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Concern articles", "settings": [] }
+{% endschema %}

@@ -1,0 +1,47 @@
+{%- comment -%}
+  The drawn pack shot: a shaded bottle (tablets, capsules) or tub (powders) in
+  the product's colour world. It is the placeholder until real photography is
+  uploaded, and it stays in use for small renders (cart, menus, the Root Film).
+
+  {% render 'pack-art', product: product, class: 'pack--lg' %}
+  or by values: {% render 'pack-art', colour: '#C0553A', short: 'CREATINE', pack: 'tub', count: '250 g' %}
+{%- endcomment -%}
+{%- liquid
+  if product
+    assign c = product.metafields.brn.colour.value
+    assign s = product.metafields.brn.short.value
+    assign k = product.metafields.brn.pack.value
+    assign n = product.metafields.brn.count.value
+  else
+    assign c = colour
+    assign s = short
+    assign k = pack
+    assign n = count
+  endif
+  assign c = c | default: '#403322'
+-%}
+<svg class="pack {{ class }}" viewBox="0 0 200 240" role="img" aria-label="BRN {{ s | escape }} pack" style="--pc:{{ c }}">
+  <ellipse cx="100" cy="226" rx="74" ry="10" fill="url(#brn-shadow)"/>
+  {%- if k == 'tub' -%}
+    <rect x="30" y="74" width="140" height="148" rx="16" fill="url(#brn-cyl)"/>
+    <rect x="26" y="50" width="148" height="34" rx="10" fill="{{ c }}"/>
+    <rect x="26" y="50" width="148" height="34" rx="10" fill="url(#brn-gloss)"/>
+    <rect x="30" y="82" width="140" height="4" fill="#000" opacity=".06"/>
+    <rect x="30" y="104" width="140" height="96" fill="#fff"/>
+    <rect x="30" y="104" width="140" height="10" fill="{{ c }}"/>
+    <text x="100" y="146" text-anchor="middle" class="pack__brand">BRN</text>
+    <text x="100" y="168" text-anchor="middle" class="pack__name">{{ s }}</text>
+    <text x="100" y="188" text-anchor="middle" class="pack__count">{{ n }}</text>
+    <rect x="30" y="74" width="140" height="148" rx="16" fill="url(#brn-gloss)" opacity=".7"/>
+  {%- else -%}
+    <rect x="72" y="22" width="56" height="34" rx="6" fill="{{ c }}"/>
+    <rect x="72" y="22" width="56" height="34" rx="6" fill="url(#brn-gloss)"/>
+    <path d="M78 56 H122 V64 C142 66 152 78 152 96 V206 C152 216 146 222 136 222 H64 C54 222 48 216 48 206 V96 C48 78 58 66 78 64 Z" fill="url(#brn-cyl)"/>
+    <rect x="48" y="104" width="104" height="92" fill="#fff"/>
+    <rect x="48" y="104" width="104" height="10" fill="{{ c }}"/>
+    <text x="100" y="146" text-anchor="middle" class="pack__brand">BRN</text>
+    <text x="100" y="166" text-anchor="middle" class="pack__name">{{ s }}</text>
+    <text x="100" y="184" text-anchor="middle" class="pack__count">{{ n }}</text>
+    <path d="M78 56 H122 V64 C142 66 152 78 152 96 V206 C152 216 146 222 136 222 H64 C54 222 48 216 48 206 V96 C48 78 58 66 78 64 Z" fill="url(#brn-gloss)" opacity=".7"/>
+  {%- endif -%}
+</svg>

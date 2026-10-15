@@ -1,0 +1,21 @@
+{%- comment -%} Shoppable vertical video card. Opens the media modal with the product beside it. {%- endcomment -%}
+{%- liquid
+  assign p = reel.product.value
+  assign pb = p.metafields.brn
+  assign first = pb.formula.value | first
+  assign ing = metaobjects.ingredient[first.i]
+-%}
+<button type="button" class="reel" style="--pc:{{ pb.colour.value }}" data-reel
+  data-title="{{ reel.title.value | escape }}" data-kind="{{ reel.kind.value | escape }}" data-length="{{ reel.length.value }}"
+  data-video="{% if reel.video.value %}{{ reel.video.value.sources.first.url }}{% endif %}"
+  data-product-title="{{ p.title | escape }}" data-product-url="{{ p.url }}" data-variant="{{ p.selected_or_first_available_variant.id }}"
+  data-price="{{ p.selected_or_first_available_variant.price | money }}" data-colour="{{ pb.colour.value }}" data-tagline="{{ pb.tagline.value | escape }}">
+  <span class="reel__poster" aria-hidden="true">
+    <span class="reel__art">{% render 'art', key: ing.art.value, class: 'ink' %}</span>
+  </span>
+  <span class="reel__kind">{{ reel.kind.value }}</span>
+  <span class="reel__play" aria-hidden="true">{% render 'icon', name: 'play', size: 18 %}</span>
+  <span class="reel__title">{{ reel.title.value }}</span>
+  <span class="reel__prod"><i></i>{{ p.title }} · {{ reel.length.value }}</span>
+  {%- if settings.show_placeholders and reel.video.value == blank -%}<span class="reel__ph">Reel · 9:16 · upload in admin</span>{%- endif -%}
+</button>

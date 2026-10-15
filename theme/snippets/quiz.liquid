@@ -1,0 +1,33 @@
+{%- comment -%}
+  Find your BRN: three questions, scored against quiz_question metaobjects.
+  The result names one product (or its stack) and says why in plain words.
+{%- endcomment -%}
+<div class="quiz" data-quiz>
+  <div class="quiz__progress" aria-hidden="true"><i data-quiz-bar></i></div>
+  {%- for q in metaobjects.quiz_question.values -%}
+    <fieldset class="quiz__step{% if forloop.first %} is-on{% endif %}" data-quiz-step="{{ forloop.index0 }}" {% unless forloop.first %}hidden{% endunless %}>
+      <legend class="quiz__q"><span class="quiz__n">{{ forloop.index }} of {{ forloop.length }}</span>{{ q.question.value }}</legend>
+      <div class="quiz__opts">
+        {%- for o in q.options.value -%}
+          <button type="button" class="quiz__opt" data-score="{{ o.score | json | escape }}">{{ o.label }}</button>
+        {%- endfor -%}
+      </div>
+    </fieldset>
+  {%- endfor -%}
+  <div class="quiz__result" data-quiz-result hidden></div>
+  <script type="application/json" data-quiz-products>
+    {
+    {%- for p in collections.all.products -%}
+      {%- assign b = p.metafields.brn -%}
+      {%- assign v = p.selected_or_first_available_variant -%}
+      {{ p.handle | json }}: {
+        "title": {{ p.title | json }}, "url": {{ p.url | json }}, "variant": {{ v.id }},
+        "price": {{ v.price | money | json }}, "colour": {{ b.colour.value | json }},
+        "tagline": {{ b.tagline.value | json }}, "made_for": {{ b.made_for.value | json }},
+        "concern": {{ b.concern.value.title.value | json }}, "concern_url": {{ b.concern.value.system.url | json }},
+        "stack": {{ b.concern.value.stack.value.title.value | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+    }
+  </script>
+</div>

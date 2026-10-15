@@ -1,0 +1,47 @@
+{%- comment -%}
+  Product card. Hover tilts it in 3D and draws three of its ingredients around
+  the pack. Shows a per-day price, because ₹11 a day sells better than ₹649.
+  {% render 'product-card', product: p, class: '' %}
+{%- endcomment -%}
+{%- liquid
+  assign b = product.metafields.brn
+  assign v = product.selected_or_first_available_variant
+  assign days = v.metafields.brn.days.value | default: 30
+  assign per_day = v.price | divided_by: days
+  assign concern = b.concern.value
+  assign handles = ''
+  for c in b.also_concerns.value
+    assign handles = handles | append: ' ' | append: c.system.handle
+  endfor
+-%}
+<article class="pcard redraw {{ class }}" style="--pc:{{ b.colour.value }}" data-tilt
+  data-concerns="{{ concern.system.handle }}{{ handles }}" data-format="{{ b.format.value | handle }}">
+  <a class="pcard__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+    <span class="pcard__halo" aria-hidden="true"></span>
+    <span class="pcard__inks" aria-hidden="true">
+      {%- for row in b.formula.value limit: 3 -%}
+        {%- assign ing = metaobjects.ingredient[row.i] -%}
+        <span class="pcard__ink pcard__ink--{{ forloop.index }}">{% render 'art', key: ing.art.value, class: 'ink' %}</span>
+      {%- endfor -%}
+    </span>
+    {%- if product.featured_image -%}
+      <img class="pcard__img" src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" width="600" height="600">
+    {%- else -%}
+      {% render 'pack-art', product: product, class: 'pcard__pack' %}
+    {%- endif -%}
+    {%- if v.metafields.brn.badge.value -%}<span class="pcard__flag">{{ v.metafields.brn.badge.value }}</span>{%- endif -%}
+  </a>
+  <div class="pcard__body">
+    <a class="chip chip--pc" href="{{ concern.system.url }}">{{ concern.short.value }}</a>
+    <h3 class="pcard__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <p class="pcard__tag">{{ b.tagline.value }}</p>
+    <div class="pcard__foot">
+      <div class="pcard__price">
+        <span class="price">{{ v.price | money }}</span>
+        {%- if v.compare_at_price > v.price -%}<s class="price--was">{{ v.compare_at_price | money }}</s>{%- endif -%}
+        <span class="perday">{{ per_day | money }}/day</span>
+      </div>
+      <button type="button" class="btn btn--sm btn--ink" data-add="{{ v.id }}" aria-label="Add {{ product.title | escape }} to cart">{% render 'icon', name: 'plus', size: 16 %}<span>Add</span></button>
+    </div>
+  </div>
+</article>

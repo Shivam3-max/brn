@@ -1,0 +1,25 @@
+{%- comment -%} Cart drawer. The body is rendered by theme.js from /cart.js so it stays in sync after every add. {%- endcomment -%}
+<aside class="drawer" data-panel="cart" aria-label="Your cart" aria-modal="true" role="dialog" hidden>
+  <header class="drawer__head">
+    <h2 class="drawer__title">Your cart <span class="drawer__count" data-cart-count-text>({{ cart.item_count }})</span></h2>
+    <button type="button" class="iconbtn" data-close aria-label="Close cart">{% render 'icon', name: 'close' %}</button>
+  </header>
+  <div class="ship" data-ship>
+    <p class="ship__text" data-ship-text>Free delivery on prepaid orders above {{ settings.free_ship_threshold | times: 100 | money }}</p>
+    <div class="ship__bar"><i data-ship-bar style="width:0%"></i></div>
+  </div>
+  <div class="drawer__body" data-cart-body>
+    <p class="drawer__empty">Your cart is empty.</p>
+  </div>
+  <div class="drawer__upsell" data-cart-upsell hidden>
+    <p class="eyebrow">Goes well with it</p>
+    <div data-cart-upsell-list></div>
+  </div>
+  <footer class="drawer__foot" data-cart-foot hidden>
+    <div class="drawer__row"><span>Subtotal</span><b data-cart-total>₹0</b></div>
+    <div class="drawer__row drawer__row--save" data-cart-save-row hidden><span>You save</span><b data-cart-save>₹0</b></div>
+    <p class="drawer__note">Taxes included. Cash on delivery available.</p>
+    <a class="btn btn--ink btn--block" href="/checkout">Checkout</a>
+    <a class="drawer__link" href="{{ routes.cart_url }}">View cart</a>
+  </footer>
+</aside>

@@ -1,0 +1,109 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Our story",
+        "title": "Root to bottle.",
+        "sub": "BRN is the nutrition brand of Nimai Lifesciences, made in our own facility in Paonta Sahib, Himachal Pradesh.",
+        "art": "j-farm",
+        "colour": "#4F6F3A"
+      }
+    },
+    "words": {
+      "type": "brand-story",
+      "blocks": {
+        "word_1": {
+          "type": "word",
+          "settings": {
+            "word": "Bare.",
+            "art": "m-proof",
+            "text": "Every ingredient and every dose on the label. No proprietary blends. Every batch report one search away."
+          }
+        },
+        "word_2": {
+          "type": "word",
+          "settings": {
+            "word": "Root.",
+            "art": "m-root",
+            "text": "Ayurveda's herbs, chosen at the part of the plant that works, and made in the Himalayan foothills."
+          }
+        },
+        "word_3": {
+          "type": "word",
+          "settings": {
+            "word": "Nutrition.",
+            "art": "i-magnesium",
+            "text": "Vitamins and minerals in forms the body absorbs, dosed for the gaps Indian diets actually have."
+          }
+        }
+      },
+      "block_order": [
+        "word_1",
+        "word_2",
+        "word_3"
+      ]
+    },
+    "rtb": {
+      "type": "root-to-bottle",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "art": "j-seed",
+            "title": "Chosen at the root",
+            "text": "Herbs picked for the part that works: kutki root, tulsi leaf, milk thistle seed."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "art": "j-farm",
+            "title": "Grown and sourced",
+            "text": "Himalayan and Indian farms we can name, and minerals in the forms the body absorbs."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "art": "j-extract",
+            "title": "Extracted and standardised",
+            "text": "Extracts measured to a set strength, so every batch carries the same dose."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "art": "j-lab",
+            "title": "Tested, batch by batch",
+            "text": "Identity, purity and heavy metals checked before anything is bottled."
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "art": "j-bottle",
+            "title": "Bottled at Nimai",
+            "text": "Packed in our own GMP facility at Paonta Sahib, with the batch number on every bottle."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5"
+      ]
+    },
+    "trust": {
+      "type": "trust-strip"
+    }
+  },
+  "order": [
+    "hero",
+    "words",
+    "rtb",
+    "trust"
+  ]
+}

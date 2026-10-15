@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Find your BRN",
+        "title": "Three questions. One clear answer.",
+        "sub": "Tell us your goal, your day and your diet. We will point you to one product, and tell you why.",
+        "art": "m-quiz",
+        "colour": "#4F6F3A"
+      }
+    },
+    "quiz": {
+      "type": "quiz-section",
+      "settings": {
+        "full": true,
+        "eyebrow": "60 seconds",
+        "title": "Let’s find yours.",
+        "sub": "No sign-up, nothing stored. You can change any answer by starting again."
+      }
+    },
+    "stacks": {
+      "type": "stacks"
+    }
+  },
+  "order": [
+    "hero",
+    "quiz",
+    "stacks"
+  ]
+}

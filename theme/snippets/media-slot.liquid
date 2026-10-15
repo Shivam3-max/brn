@@ -1,0 +1,24 @@
+{%- comment -%}
+  Every uploadable image goes through here. Until an image is set it renders a
+  designed placeholder: a soft field in the slot's colour with one of the BRN
+  drawings, and (while "Show placeholder labels" is on) the slot name and the
+  exact pixel size to upload.
+
+  {% render 'media-slot', image: img, label: 'Hero banner 1 · desktop', w: 1920, h: 800, art: 'm-root', colour: '#5E8A33' %}
+{%- endcomment -%}
+{%- assign slot_art = art | default: 'm-root' -%}
+{%- assign sw = w | default: 4 -%}
+{%- assign sh = h | default: 3 -%}
+<div class="slot {{ class }}{% if image %} slot--filled{% endif %}" style="--ar:{{ sw }}/{{ sh }};--pc:{{ colour | default: '#403322' }}">
+  {%- if image -%}
+    <img src="{{ image | image_url: width: sw }}" alt="{{ alt | default: image.alt | escape }}" width="{{ sw }}" height="{{ sh }}"
+      {% if eager %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+  {%- else -%}
+    <div class="slot__ph" aria-hidden="true">
+      <span class="slot__art">{% render 'art', key: slot_art, class: 'ink' %}</span>
+      {%- if settings.show_placeholders -%}
+        <span class="slot__label"><b>{{ label }}</b><span>{{ sw }} × {{ sh }} px · upload in Theme editor</span></span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>

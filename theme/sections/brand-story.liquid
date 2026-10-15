@@ -1,0 +1,28 @@
+<section class="sec bstory">
+  <div class="wrap">
+    <div class="bstory__words">
+      {%- for block in section.blocks -%}
+        <article class="bword rv" style="--d:{{ forloop.index0 | times: 120 }}ms" {{ block.shopify_attributes }}>
+          <span class="bword__art">{% render 'art', key: block.settings.art, class: 'ink' %}</span>
+          <h2 class="bword__w">{{ block.settings.word }}</h2>
+          <p>{{ block.settings.text }}</p>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Bare · Root · Nutrition",
+  "blocks": [ { "type": "word", "name": "Word", "settings": [
+    { "type": "text", "id": "word", "label": "Word" },
+    { "type": "text", "id": "art", "label": "Drawing key", "default": "m-root" },
+    { "type": "textarea", "id": "text", "label": "Text" }
+  ] } ],
+  "presets": [ { "name": "Bare · Root · Nutrition", "blocks": [
+    { "type": "word", "settings": { "word": "Bare.", "art": "m-proof", "text": "Every ingredient and every dose on the label. No proprietary blends. Every batch report one search away." } },
+    { "type": "word", "settings": { "word": "Root.", "art": "m-root", "text": "Ayurveda's herbs, chosen at the part of the plant that works, and made in the Himalayan foothills." } },
+    { "type": "word", "settings": { "word": "Nutrition.", "art": "i-magnesium", "text": "Vitamins and minerals in forms the body absorbs, dosed for the gaps Indian diets actually have." } }
+  ] } ]
+}
+{% endschema %}

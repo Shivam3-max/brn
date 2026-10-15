@@ -1,0 +1,206 @@
+{
+  "main-menu": {
+    "links": [
+      {
+        "title": "Home",
+        "url": "/",
+        "links": []
+      },
+      {
+        "title": "Shop",
+        "url": "/collections/all",
+        "links": [
+          {
+            "title": "Multivitamin & Multimineral",
+            "url": "/products/multivitamin-multimineral"
+          },
+          {
+            "title": "Liver Care",
+            "url": "/products/liver-detox"
+          },
+          {
+            "title": "Calcium + Magnesium + D3",
+            "url": "/products/calcium-magnesium-d3"
+          },
+          {
+            "title": "Magnesium + Tulsi",
+            "url": "/products/magnesium-tulsi"
+          },
+          {
+            "title": "Creatine Monohydrate",
+            "url": "/products/creatine"
+          },
+          {
+            "title": "Mass Gainer",
+            "url": "/products/mass-gainer"
+          },
+          {
+            "title": "Gut Health",
+            "url": "/products/gut-health"
+          },
+          {
+            "title": "Joint Support",
+            "url": "/products/joint-support"
+          },
+          {
+            "title": "Shop all",
+            "url": "/collections/all"
+          }
+        ]
+      },
+      {
+        "title": "Shop by Concern",
+        "url": "#concerns",
+        "links": []
+      },
+      {
+        "title": "Stacks",
+        "url": "/pages/stacks",
+        "links": []
+      },
+      {
+        "title": "Made for You",
+        "url": "/collections/all",
+        "links": [
+          {
+            "title": "Gym & training",
+            "url": "/collections/for-gym"
+          },
+          {
+            "title": "Working professionals",
+            "url": "/collections/for-professionals"
+          },
+          {
+            "title": "Women",
+            "url": "/collections/for-women"
+          },
+          {
+            "title": "40 plus",
+            "url": "/collections/for-40-plus"
+          },
+          {
+            "title": "Vegetarians",
+            "url": "/collections/for-vegetarians"
+          },
+          {
+            "title": "Students",
+            "url": "/collections/for-students"
+          }
+        ]
+      },
+      {
+        "title": "Find your BRN",
+        "url": "/pages/find-your-brn",
+        "links": []
+      },
+      {
+        "title": "Talk to an Expert",
+        "url": "/pages/contact",
+        "links": []
+      },
+      {
+        "title": "Our Story",
+        "url": "/pages/our-story",
+        "links": []
+      },
+      {
+        "title": "Learn",
+        "url": "/blogs/learn",
+        "links": [
+          {
+            "title": "Ingredient library",
+            "url": "/pages/ingredients"
+          },
+          {
+            "title": "Articles",
+            "url": "/blogs/learn"
+          },
+          {
+            "title": "Bare Proof: batch reports",
+            "url": "/pages/bare-proof"
+          },
+          {
+            "title": "Body map",
+            "url": "/pages/body-map"
+          }
+        ]
+      },
+      {
+        "title": "Track Order",
+        "url": "/account",
+        "links": []
+      }
+    ]
+  },
+  "footer-shop": {
+    "title": "Shop",
+    "links": [
+      {
+        "title": "Shop all",
+        "url": "/collections/all"
+      },
+      {
+        "title": "Stacks",
+        "url": "/pages/stacks"
+      },
+      {
+        "title": "Find your BRN",
+        "url": "/pages/find-your-brn"
+      },
+      {
+        "title": "Body map",
+        "url": "/pages/body-map"
+      }
+    ]
+  },
+  "footer-learn": {
+    "title": "Learn",
+    "links": [
+      {
+        "title": "Ingredient library",
+        "url": "/pages/ingredients"
+      },
+      {
+        "title": "Articles",
+        "url": "/blogs/learn"
+      },
+      {
+        "title": "Bare Proof",
+        "url": "/pages/bare-proof"
+      },
+      {
+        "title": "Root to bottle",
+        "url": "/pages/our-story"
+      }
+    ]
+  },
+  "footer-help": {
+    "title": "Help",
+    "links": [
+      {
+        "title": "FAQs",
+        "url": "/pages/faq"
+      },
+      {
+        "title": "Contact us",
+        "url": "/pages/contact"
+      },
+      {
+        "title": "Shipping policy",
+        "url": "/policies/shipping-policy"
+      },
+      {
+        "title": "Refund policy",
+        "url": "/policies/refund-policy"
+      },
+      {
+        "title": "Privacy policy",
+        "url": "/policies/privacy-policy"
+      },
+      {
+        "title": "Terms of service",
+        "url": "/policies/terms-of-service"
+      }
+    ]
+  }
+}

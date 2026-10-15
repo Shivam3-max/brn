@@ -1,0 +1,27 @@
+<section class="sec reels">
+  <div class="wrap">
+    <div class="sec__head sec__head--row rv">
+      <div>
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2 class="h2">{{ section.settings.title }}</h2>
+      </div>
+      <div class="rail__nav">
+        <button type="button" class="iconbtn iconbtn--line" data-rail-prev aria-label="Scroll back">{% render 'icon', name: 'arrow-left' %}</button>
+        <button type="button" class="iconbtn iconbtn--line" data-rail-next aria-label="Scroll forward">{% render 'icon', name: 'arrow' %}</button>
+      </div>
+    </div>
+    <div class="rail rail--reels" data-rail>
+      {%- for r in metaobjects.reel.values -%}{% render 'reel-card', reel: r %}{%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Shoppable reels",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Watch & shop" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Real questions. 30-second answers." }
+  ],
+  "presets": [ { "name": "Shoppable reels" } ]
+}
+{% endschema %}

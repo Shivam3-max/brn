@@ -1,0 +1,57 @@
+{%- comment -%}
+  The "inside the bottle" stage for one product: the pack in the middle and
+  each ingredient (or, for single-ingredient products, each step of how it
+  works) arranged on a ring around it. Positions are pure CSS: every node gets
+  an angle and is rotated out, translated, and rotated back upright.
+
+  theme.js plays it: nodes light up one by one, their drawings ink in, and the
+  caption panel reads each node's data-* attributes.
+
+  {% render 'story-stage', product: p, active: true %}
+{%- endcomment -%}
+{%- liquid
+  assign b = product.metafields.brn
+  assign story = b.story.value
+  if story
+    assign n = story.size
+  else
+    assign n = b.formula.value.size
+  endif
+-%}
+<div class="stage{% if active %} is-active{% endif %}" data-stage="{{ product.handle }}" style="--pc:{{ b.colour.value }};--n:{{ n }}"
+  data-title="{{ product.title | escape }}" data-url="{{ product.url }}" data-variant="{{ product.selected_or_first_available_variant.id }}"
+  data-tagline="{{ b.tagline.value | escape }}" {% unless active %}hidden{% endunless %}>
+  <div class="stage__ring">
+    {%- if story -%}
+      {%- for s in story -%}
+        {%- assign a = forloop.index0 | times: 360.0 | divided_by: n | minus: 90 -%}
+        <span class="stage__spoke" style="--a:{{ a }}deg;--k:{{ forloop.index0 }}" aria-hidden="true"></span>
+        <button type="button" class="stage__node" style="--a:{{ a }}deg;--k:{{ forloop.index0 }}" data-step="{{ forloop.index0 }}"
+          data-name="{{ s.title | escape }}" data-does="{{ s.does | escape }}" data-low="{{ s.low | escape }}" data-kind="step">
+          <span class="stage__bubble">{% render 'art', key: s.art, class: 'ink' %}</span>
+          <span class="stage__label">{{ s.title }}</span>
+        </button>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for row in b.formula.value -%}
+        {%- assign ing = metaobjects.ingredient[row.i] -%}
+        {%- assign a = forloop.index0 | times: 360.0 | divided_by: n | minus: 90 -%}
+        <span class="stage__spoke" style="--a:{{ a }}deg;--k:{{ forloop.index0 }}" aria-hidden="true"></span>
+        <button type="button" class="stage__node" style="--a:{{ a }}deg;--k:{{ forloop.index0 }}" data-step="{{ forloop.index0 }}"
+          data-name="{{ ing.name.value | escape }}" data-aka="{{ ing.aka.value | escape }}" data-does="{{ ing.does.value | escape }}"
+          data-low="{{ ing.low.value | escape }}" data-dose="{{ row.dose | escape }}" data-url="{{ ing.system.url }}" data-kind="ingredient">
+          <span class="stage__bubble">{% render 'art', key: ing.art.value, class: 'ink' %}</span>
+          <span class="stage__label">{{ ing.name.value }}</span>
+        </button>
+      {%- endfor -%}
+    {%- endif -%}
+    <div class="stage__core">
+      <span class="stage__glow" aria-hidden="true"></span>
+      {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title | escape }}" loading="lazy" width="500" height="500">
+      {%- else -%}
+        {% render 'pack-art', product: product, class: 'stage__pack' %}
+      {%- endif -%}
+    </div>
+  </div>
+</div>

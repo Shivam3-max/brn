@@ -1,0 +1,128 @@
+{%- comment -%}
+  Product hero: gallery (drawn pack or photos · turnable 3D bottle · product
+  film) beside the buy box (pack ladder with per-day price, add, delivery).
+  A sticky bar keeps price and Add on screen the whole way down.
+{%- endcomment -%}
+{%- liquid
+  assign b = product.metafields.brn
+  assign v = product.selected_or_first_available_variant
+  assign concern = b.concern.value
+  assign days = v.metafields.brn.days.value | default: 30
+  assign per_day = v.price | divided_by: days
+-%}
+<section class="pdp" style="--pc:{{ b.colour.value }}" data-pdp data-handle="{{ product.handle }}">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="{{ concern.system.url }}">{{ concern.title.value }}</a><span>/</span><span aria-current="page">{{ product.title }}</span></nav>
+    <div class="pdp__grid">
+      <div class="pdp__gallery" data-gallery>
+        <div class="pdp__view is-on" data-view="pack">
+          <span class="pdp__halo" aria-hidden="true"></span>
+          <span class="pdp__floats" aria-hidden="true">
+            {%- for row in b.formula.value limit: 4 -%}
+              {%- assign ing = metaobjects.ingredient[row.i] -%}
+              <span class="pdp__float pdp__float--{{ forloop.index }}">{% render 'art', key: ing.art.value, class: 'ink' %}</span>
+            {%- endfor -%}
+          </span>
+          {%- if product.featured_image -%}
+            <img class="pdp__img" src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.title | escape }}" width="1000" height="1000">
+          {%- else -%}
+            {% render 'pack-art', product: product, class: 'pdp__pack' %}
+          {%- endif -%}
+          {%- if settings.show_placeholders and product.images.size == 0 -%}<span class="pdp__ph">Drawn pack · upload pack shots (2000 × 2000 px) in Products</span>{%- endif -%}
+        </div>
+        {%- for img in product.images offset: 1 -%}
+          <div class="pdp__view" data-view="img-{{ forloop.index }}" hidden><img class="pdp__img" src="{{ img | image_url: width: 1000 }}" alt="{{ img.alt | escape }}" loading="lazy" width="1000" height="1000"></div>
+        {%- endfor -%}
+        <div class="pdp__view pdp__view--3d" data-view="3d" hidden>
+          <div class="pdp__gl" data-bottle-3d data-colour="{{ b.colour.value }}" data-short="{{ b.short.value | escape }}" data-count="{{ b.count.value | escape }}" data-pack="{{ b.pack.value }}">
+            {% render 'pack-art', product: product, class: 'pdp__pack pdp__pack--fallback' %}
+          </div>
+          <span class="pdp__hint">{% render 'icon', name: 'rotate', size: 16 %}Drag to turn</span>
+        </div>
+        <div class="pdp__view" data-view="film" hidden>
+          {% render 'video-slot', video: b.story_video.value, label: 'Product film', spec: '1:1 · 10–15 s', ratio: '1/1', colour: b.colour.value, art: 'j-bottle', title: product.title %}
+        </div>
+        <div class="pdp__thumbs" role="tablist" aria-label="Product views">
+          <button type="button" class="pdp__thumb is-on" data-view-btn="pack" role="tab" aria-selected="true">{% render 'pack-art', product: product %}<span>Pack</span></button>
+          {%- for img in product.images offset: 1 -%}
+            <button type="button" class="pdp__thumb" data-view-btn="img-{{ forloop.index }}" role="tab" aria-selected="false"><img src="{{ img | image_url: width: 160 }}" alt=""><span>Photo</span></button>
+          {%- endfor -%}
+          <button type="button" class="pdp__thumb pdp__thumb--3d" data-view-btn="3d" role="tab" aria-selected="false">{% render 'icon', name: 'rotate', size: 22 %}<span>3D</span></button>
+          <button type="button" class="pdp__thumb" data-view-btn="film" role="tab" aria-selected="false">{% render 'icon', name: 'play', size: 18 %}<span>Film</span></button>
+        </div>
+      </div>
+
+      <div class="pdp__info">
+        <div class="pdp__chips">
+          {% render 'chip-concern', concern: concern %}
+          {%- for c in b.also_concerns.value -%}{% render 'chip-concern', concern: c %}{%- endfor -%}
+        </div>
+        <h1 class="pdp__title">{{ product.title }}</h1>
+        {%- if b.title_note.value and settings.show_placeholders -%}<p class="pdp__note">{{ b.title_note.value }}</p>{%- endif -%}
+        <p class="pdp__tag">{{ b.tagline.value }}</p>
+        {%- if product.metafields.reviews.rating_count.value > 0 -%}
+          <a class="pdp__rating" href="#reviews">{% render 'icon', name: 'star', size: 16 %}{{ product.metafields.reviews.rating.value.rating | round: 1 }} · {{ product.metafields.reviews.rating_count.value }} reviews</a>
+        {%- endif -%}
+        <p class="pdp__for">{% render 'art', key: concern.icon.value, class: 'pdp__for-art' %}<span><b>Made for</b> {{ b.made_for.value }}</span></p>
+        <ul class="pdp__ings">
+          {%- for row in b.formula.value -%}
+            {%- assign ing = metaobjects.ingredient[row.i] -%}
+            <li><a href="{{ ing.system.url }}">{% render 'art', key: ing.art.value %}{{ ing.name.value }}</a></li>
+          {%- endfor -%}
+        </ul>
+
+        {%- form 'product', product, class: 'pdp__form' -%}
+          <input type="hidden" name="id" value="{{ v.id }}" data-variant-input>
+          <fieldset class="ladder">
+            <legend class="ladder__legend">Choose your pack <span>{{ b.serving.value }}</span></legend>
+            {%- for x in product.variants -%}
+              {%- assign xd = x.metafields.brn.days.value | default: 30 -%}
+              {%- assign xpd = x.price | divided_by: xd -%}
+              {%- assign save = x.compare_at_price | minus: x.price | times: 100 | divided_by: x.compare_at_price -%}
+              <label class="rung{% if x.id == v.id %} is-on{% endif %}">
+                <input type="radio" name="pack" value="{{ x.id }}" {% if x.id == v.id %}checked{% endif %}
+                  data-price="{{ x.price | money }}" data-compare="{% if x.compare_at_price > x.price %}{{ x.compare_at_price | money }}{% endif %}" data-perday="{{ xpd | money }}" data-save="{{ save }}">
+                <span class="rung__t">{{ x.title }}{% if x.metafields.brn.badge.value %}<em>{{ x.metafields.brn.badge.value }}</em>{% endif %}</span>
+                <span class="rung__d">{{ xd }} days · {{ xpd | money }}/day</span>
+                <span class="rung__p">{{ x.price | money }}{% if x.compare_at_price > x.price %}<s>{{ x.compare_at_price | money }}</s>{% endif %}</span>
+              </label>
+            {%- endfor -%}
+          </fieldset>
+          <div class="pdp__price">
+            <span class="price price--lg" data-price>{{ v.price | money }}</span>
+            {%- if v.compare_at_price > v.price -%}<s class="price--was" data-compare>{{ v.compare_at_price | money }}</s>{%- endif -%}
+            <span class="pdp__perday" data-perday>{{ per_day | money }} a day</span>
+            <span class="pdp__tax">Incl. of all taxes</span>
+          </div>
+          <div class="pdp__buy">
+            <div class="qty" data-qty-box>
+              <button type="button" data-step="-1" aria-label="One less">{% render 'icon', name: 'minus', size: 16 %}</button>
+              <input type="number" name="quantity" value="1" min="1" max="10" aria-label="Quantity" data-qty-input>
+              <button type="button" data-step="1" aria-label="One more">{% render 'icon', name: 'plus', size: 16 %}</button>
+            </div>
+            <button type="submit" class="btn btn--ink pdp__add" data-add-main>Add to cart</button>
+          </div>
+          <button type="button" class="btn btn--ghost btn--block" data-buy-now>Buy it now</button>
+        {%- endform -%}
+
+        <ul class="pdp__perks">
+          <li>{% render 'icon', name: 'truck', size: 18 %}<span><b>Free delivery</b> on prepaid orders above {{ settings.free_ship_threshold | times: 100 | money }}</span></li>
+          <li>{% render 'icon', name: 'cash', size: 18 %}<span><b>Cash on delivery</b> across India</span></li>
+          <li>{% render 'icon', name: 'flask', size: 18 %}<span><b>Batch tested</b> · <a href="/pages/bare-proof">check yours on Bare Proof</a></span></li>
+        </ul>
+        <a class="pdp__quiz" href="/pages/find-your-brn">{% render 'icon', name: 'quiz', size: 18 %}Not sure this is the one? Take the 60-second quiz</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="satc" data-sticky-atc style="--pc:{{ b.colour.value }}" hidden>
+  <div class="wrap satc__in">
+    <span class="satc__pack">{% render 'pack-art', product: product %}</span>
+    <span class="satc__t">{{ product.title }}<small data-satc-variant>{{ v.title }} · <span data-satc-price>{{ v.price | money }}</span></small></span>
+    <button type="button" class="btn btn--ink btn--sm" data-satc-add>Add to cart</button>
+  </div>
+</div>
+{% schema %}
+{ "name": "Product", "settings": [] }
+{% endschema %}

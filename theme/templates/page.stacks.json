@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Stacks",
+        "title": "Better together, and cheaper too.",
+        "sub": "Ready-made combos for the most common goals, or build your own and save up to 15%.",
+        "art": "m-stack",
+        "colour": "#C0553A"
+      }
+    },
+    "stacks": {
+      "type": "stacks",
+      "settings": {
+        "eyebrow": "Ready-made",
+        "title": "Three stacks, three goals."
+      }
+    },
+    "builder": {
+      "type": "stack-builder"
+    }
+  },
+  "order": [
+    "hero",
+    "stacks",
+    "builder"
+  ]
+}

@@ -1,0 +1,20 @@
+{%- assign b = product.metafields.brn -%}
+<section class="sec plabel" id="label" style="--pc:{{ b.colour.value }}">
+  <div class="wrap plabel__grid">
+    <div class="plabel__panel rv">{% render 'label-panel', product: product %}</div>
+    <div class="plabel__side">
+      <div class="sec__head rv">
+        <p class="eyebrow">Read the label</p>
+        <h2 class="h2">Every dose, printed. Nothing hidden in a blend.</h2>
+      </div>
+      <div class="who rv">
+        <div class="who__col"><p class="who__h">{% render 'icon', name: 'check', size: 16 %}Made for</p><ul>{%- for w in b.who_for.value -%}<li>{{ w }}</li>{%- endfor -%}</ul></div>
+        <div class="who__col who__col--skip"><p class="who__h">{% render 'icon', name: 'close', size: 16 %}Ask a doctor first</p><ul>{%- for w in b.who_skip.value -%}<li>{{ w }}</li>{%- endfor -%}</ul></div>
+      </div>
+      <div class="rv">{% render 'proof-form', id: 'pdp' %}</div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Label + who it's for", "presets": [ { "name": "Label + who it's for" } ] }
+{% endschema %}

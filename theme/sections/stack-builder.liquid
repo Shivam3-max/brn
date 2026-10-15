@@ -1,0 +1,47 @@
+{%- comment -%}
+  Build your own stack. Pick any products; the saving grows with the count.
+  The tiers shown here must match an automatic "buy X, get Y% off" discount
+  in Shopify admin (see docs/SHOPIFY-SETUP.md) so checkout honours them.
+{%- endcomment -%}
+<section class="sec builder" data-builder data-tiers="{{ section.settings.tiers }}">
+  <div class="wrap builder__grid">
+    <div>
+      <div class="sec__head rv">
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2 class="h2">{{ section.settings.title }}</h2>
+        <p class="sec__sub">{{ section.settings.sub }}</p>
+      </div>
+      <div class="builder__picks">
+        {%- for p in collections.all.products -%}
+          {%- assign b = p.metafields.brn -%}
+          <label class="bpick" style="--pc:{{ b.colour.value }}">
+            <input type="checkbox" id="bpick-{{ p.handle }}" value="{{ p.selected_or_first_available_variant.id }}" data-price="{{ p.selected_or_first_available_variant.price }}" data-title="{{ p.title | escape }}">
+            <span class="bpick__pack">{% render 'pack-art', product: p %}</span>
+            <span class="bpick__t">{{ p.title }}<small>{{ p.selected_or_first_available_variant.price | money }} · {{ b.concern.value.short.value }}</small></span>
+            <i class="bpick__tick" aria-hidden="true">{% render 'icon', name: 'check', size: 16 %}</i>
+          </label>
+        {%- endfor -%}
+      </div>
+    </div>
+    <aside class="builder__sum" aria-live="polite">
+      <p class="eyebrow">Your stack</p>
+      <div class="builder__tray" data-builder-tray><p class="builder__empty">Pick two or more to start saving.</p></div>
+      <ol class="builder__tiers" data-builder-tiers></ol>
+      <div class="builder__row"><span>Total</span><span><s data-builder-was></s> <b data-builder-total>₹0</b></span></div>
+      <button type="button" class="btn btn--ink btn--block" data-builder-add disabled>Add stack to cart</button>
+      <p class="note">The saving is applied automatically at checkout.</p>
+    </aside>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Stack builder",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Build your own" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Pick what you need. Save as you add." },
+    { "type": "text", "id": "sub", "label": "Subheading", "default": "Two products save 5%, three save 10%, four or more save 15%." },
+    { "type": "text", "id": "tiers", "label": "Tiers (count:percent)", "default": "2:5,3:10,4:15" }
+  ],
+  "presets": [ { "name": "Stack builder" } ]
+}
+{% endschema %}

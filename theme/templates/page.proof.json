@@ -1,0 +1,65 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Bare Proof",
+        "title": "Check the lab report for your bottle.",
+        "sub": "Every BRN batch is tested before it ships. Type the batch number from your pack to see its report.",
+        "art": "m-proof",
+        "colour": "#4F6F3A"
+      }
+    },
+    "proof": {
+      "type": "proof-page",
+      "blocks": {
+        "test_1": {
+          "type": "test",
+          "settings": {
+            "art": "m-proof",
+            "title": "Identity",
+            "text": "Is each ingredient what the label says it is?"
+          }
+        },
+        "test_2": {
+          "type": "test",
+          "settings": {
+            "art": "m-flask",
+            "title": "Strength",
+            "text": "Does each serving carry the dose printed on the label?"
+          }
+        },
+        "test_3": {
+          "type": "test",
+          "settings": {
+            "art": "m-shield",
+            "title": "Purity",
+            "text": "Heavy metals and microbes checked against FSSAI limits."
+          }
+        },
+        "test_4": {
+          "type": "test",
+          "settings": {
+            "art": "m-leaf",
+            "title": "Nothing extra",
+            "text": "No banned substances, no undeclared fillers."
+          }
+        }
+      },
+      "block_order": [
+        "test_1",
+        "test_2",
+        "test_3",
+        "test_4"
+      ]
+    },
+    "bare": {
+      "type": "bare-label"
+    }
+  },
+  "order": [
+    "hero",
+    "proof",
+    "bare"
+  ]
+}

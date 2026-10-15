@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Ingredient library",
+        "title": "Know every ingredient by name.",
+        "sub": "What each one is, what it does, the signs you may be low, and which BRN formula carries it.",
+        "art": "i-tulsi",
+        "colour": "#4F6F3A"
+      }
+    },
+    "lib": {
+      "type": "ingredient-library"
+    }
+  },
+  "order": [
+    "hero",
+    "lib"
+  ]
+}

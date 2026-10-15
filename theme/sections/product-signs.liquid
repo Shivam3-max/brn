@@ -1,0 +1,29 @@
+{%- assign b = product.metafields.brn -%}
+{%- assign concern = b.concern.value -%}
+<section class="sec psigns" style="--pc:{{ b.colour.value }}">
+  <div class="wrap psigns__grid">
+    <div class="psigns__left">
+      <div class="sec__head rv">
+        <p class="eyebrow">Signs you may need it</p>
+        <h2 class="h2">Recognise any of these?</h2>
+        <p class="sec__sub">Everyday signs that often point to the gap this formula fills. They can have other causes too, so check with your doctor if they persist.</p>
+      </div>
+      <ul class="signs">
+        {%- for s in b.signs.value -%}
+          <li class="sign rv" style="--d:{{ forloop.index0 | times: 90 }}ms"><span class="sign__art">{% render 'art', key: s[0], class: 'ink' %}</span><span>{{ s[1] }}</span></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    <div class="psigns__body rv">
+      <div class="psigns__fig">{% render 'body-figure', only: concern.system.handle %}</div>
+      <div class="psigns__explain">
+        <p class="eyebrow">What's going on inside</p>
+        <p>{{ concern.explain.value }}</p>
+        <a class="link-arrow" href="{{ concern.system.url }}">More on {{ concern.short.value | downcase }} {% render 'icon', name: 'arrow', size: 14 %}</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Signs + body", "presets": [ { "name": "Signs + body" } ] }
+{% endschema %}

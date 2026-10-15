@@ -1,0 +1,14 @@
+{%- assign b = product.metafields.brn -%}
+{%- assign stack = b.concern.value.stack.value -%}
+<section class="sec ppairs">
+  <div class="wrap">
+    <div class="sec__head rv"><p class="eyebrow">Pairs well with</p><h2 class="h2">Make it a routine.</h2></div>
+    <div class="ppairs__grid">
+      {%- if stack -%}<div class="rv">{% render 'stack-card', stack: stack %}</div>{%- endif -%}
+      {%- for p in b.pairs.value limit: 2 -%}<div class="rv" style="--d:{{ forloop.index | times: 90 }}ms">{% render 'product-card', product: p %}</div>{%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Pairs well with", "presets": [ { "name": "Pairs well with" } ] }
+{% endschema %}

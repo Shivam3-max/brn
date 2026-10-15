@@ -1,0 +1,21 @@
+{%- assign b = product.metafields.brn -%}
+{%- assign concern = b.concern.value -%}
+<section class="sec pstory" style="--pc:{{ b.colour.value }}">
+  <div class="wrap pstory__grid">
+    <div class="pstory__video rv">
+      {%- assign first = b.formula.value | first -%}
+      {% render 'video-slot', video: b.story_video.value, label: 'The 30-second story', spec: '16:9 · 30–45 s · captions', ratio: '16/9', colour: b.colour.value, art: metaobjects.ingredient[first.i].art.value, title: concern.hook.value %}
+    </div>
+    <div class="pstory__text rv" style="--d:120ms">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <p class="pstory__hook">“{{ concern.hook.value }}”</p>
+      <p class="pstory__explain">{{ concern.explain.value }}</p>
+      <ul class="ticklist">
+        {%- for w in b.who_for.value -%}<li>{% render 'icon', name: 'check', size: 16 %}{{ w }}</li>{%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Product story", "settings": [ { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The 30-second story" } ], "presets": [ { "name": "Product story" } ] }
+{% endschema %}

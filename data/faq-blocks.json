@@ -1,0 +1,58 @@
+{
+  "q1": {
+    "type": "qa",
+    "settings": {
+      "q": "Is BRN FSSAI licensed?",
+      "a": "<p>Yes. Every BRN product is made under an FSSAI licence. The licence number is printed on every pack.</p>"
+    }
+  },
+  "q2": {
+    "type": "qa",
+    "settings": {
+      "q": "Where are BRN products made?",
+      "a": "<p>At Nimai Lifesciences, our own manufacturing facility in Paonta Sahib, Himachal Pradesh.</p>"
+    }
+  },
+  "q3": {
+    "type": "qa",
+    "settings": {
+      "q": "Do you offer cash on delivery?",
+      "a": "<p>Yes, across India. Prepaid orders get an extra discount and ship first.</p>"
+    }
+  },
+  "q4": {
+    "type": "qa",
+    "settings": {
+      "q": "How long does delivery take?",
+      "a": "<p>Usually 3 to 6 working days, depending on your pin code.</p>"
+    }
+  },
+  "q5": {
+    "type": "qa",
+    "settings": {
+      "q": "Are the products vegetarian?",
+      "a": "<p>Yes. Capsules use vegetarian shells. The mass gainer contains milk protein.</p>"
+    }
+  },
+  "q6": {
+    "type": "qa",
+    "settings": {
+      "q": "Can I take more than one BRN product together?",
+      "a": "<p>Yes. Our stacks are designed to be taken together. If you take regular medication, check with your doctor first.</p>"
+    }
+  },
+  "q7": {
+    "type": "qa",
+    "settings": {
+      "q": "What is Bare Proof?",
+      "a": "<p>Every batch is tested. Type the batch number from your bottle on our Bare Proof page to see that batch’s lab report.</p>"
+    }
+  },
+  "q8": {
+    "type": "qa",
+    "settings": {
+      "q": "What if a product does not suit me?",
+      "a": "<p>Write to us within 7 days of delivery and we will help, including a replacement or refund under our return policy.</p>"
+    }
+  }
+}

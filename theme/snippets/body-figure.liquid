@@ -1,0 +1,26 @@
+{%- comment -%}
+  Line-drawn body with one glowing point per concern (positions come from each
+  concern's body_x / body_y fields, on a 200×360 grid).
+  {% render 'body-figure', interactive: true, only: 'liver-care' %}
+{%- endcomment -%}
+<svg class="figure{% if only %} figure--one{% endif %}" viewBox="0 0 200 360" role="group" aria-label="Body map">
+  <g class="figure__body" aria-hidden="true">
+    <circle cx="100" cy="38" r="22"/>
+    <path d="M92 58 L92 68 M108 58 L108 68"/>
+    <path d="M70 72 C80 66 120 66 130 72 C138 76 140 88 138 100 L134 150 C132 170 128 188 126 196 L74 196 C72 188 68 170 66 150 L62 100 C60 88 62 76 70 72 Z"/>
+    <path d="M68 78 C56 86 50 104 48 124 C46 144 44 164 42 180"/>
+    <path d="M132 78 C144 86 150 104 152 124 C154 144 156 164 158 180"/>
+    <path d="M78 196 C76 230 76 262 80 292 C82 312 82 330 80 346"/>
+    <path d="M122 196 C124 230 124 262 120 292 C118 312 118 330 120 346"/>
+    <path d="M100 196 L100 226"/>
+  </g>
+  {%- for c in metaobjects.concern.values -%}
+    {%- if only == blank or only == c.system.handle -%}
+    <g class="hot{% if only == c.system.handle %} is-on{% endif %}" style="--pc:{{ c.colour.value }}" data-zone="{{ c.system.handle }}"
+      {% if interactive %}tabindex="0" role="button" aria-label="{{ c.title.value | escape }}"{% endif %}>
+      <circle class="hot__pulse" cx="{{ c.body_x.value }}" cy="{{ c.body_y.value }}" r="13"/>
+      <circle class="hot__core" cx="{{ c.body_x.value }}" cy="{{ c.body_y.value }}" r="6.5"/>
+    </g>
+    {%- endif -%}
+  {%- endfor -%}
+</svg>

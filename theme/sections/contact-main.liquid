@@ -1,0 +1,25 @@
+<section class="sec contact">
+  <div class="wrap contact__grid">
+    {%- form 'contact', class: 'contact__form' -%}
+      <div class="field"><label for="c-name">Your name</label><input id="c-name" name="contact[name]" autocomplete="name" required></div>
+      <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" name="contact[email]" autocomplete="email" required></div>
+      <div class="field"><label for="c-phone">Phone (optional)</label><input id="c-phone" type="tel" name="contact[phone]" autocomplete="tel"></div>
+      <div class="field"><label for="c-msg">How can we help?</label><textarea id="c-msg" name="contact[body]" required></textarea></div>
+      <button type="submit" class="btn btn--ink">Send message</button>
+    {%- endform -%}
+    <div class="contact__side">
+      <div class="contact__card">
+        <p class="eyebrow">Talk to a person</p>
+        {%- if settings.phone != blank -%}<p>{% render 'icon', name: 'phone', size: 18 %}{{ settings.phone }}</p>{%- endif -%}
+        {%- if settings.whatsapp != blank -%}<p>{% render 'icon', name: 'whatsapp', size: 18 %}<a href="https://wa.me/{{ settings.whatsapp }}">WhatsApp us</a></p>{%- endif -%}
+        {%- if settings.email != blank -%}<p>{% render 'icon', name: 'mail', size: 18 %}{{ settings.email }}</p>{%- endif -%}
+        {%- if settings.address != blank -%}<p>{% render 'icon', name: 'pin', size: 18 %}{{ settings.address }}</p>{%- endif -%}
+        {%- if settings.phone == blank and settings.email == blank and settings.show_placeholders -%}<p class="ph-note">Add phone, WhatsApp, email and address in Theme settings → Contact &amp; legal and they appear here and in the footer.</p>{%- endif -%}
+      </div>
+      <a class="contact__card contact__card--link" href="/pages/faq">{% render 'art', key: 'm-quiz', class: 'contact__art' %}<span><b>Most questions are answered here</b>Shipping, COD, returns, dosing and more</span></a>
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Contact", "settings": [] }
+{% endschema %}

@@ -1,0 +1,21 @@
+{%- assign msgs = settings.announcements | newline_to_br | split: '<br />' -%}
+<div class="ann" data-ann>
+  <div class="ann__track">
+    {%- assign n = 0 -%}
+    {%- for m in msgs -%}
+      {%- assign line = m | strip -%}
+      {%- if line != blank -%}
+        {%- assign parts = line | split: '|' -%}
+        {%- assign t = parts[0] | strip -%}
+        {%- assign u = parts[1] | strip -%}
+        <p class="ann__msg{% if n == 0 %} is-on{% endif %}">
+          {%- if u != blank -%}<a href="{{ u }}">{{ t }} {% render 'icon', name: 'arrow', size: 16 %}</a>{%- else -%}{{ t }}{%- endif -%}
+        </p>
+        {%- assign n = n | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+{% schema %}
+{ "name": "Announcement bar", "settings": [ { "type": "paragraph", "content": "Messages are edited in Theme settings → Store." } ] }
+{% endschema %}

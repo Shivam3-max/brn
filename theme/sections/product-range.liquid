@@ -1,0 +1,35 @@
+<section class="sec range" data-range>
+  <div class="wrap">
+    <div class="sec__head sec__head--row rv">
+      <div>
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2 class="h2">{{ section.settings.title }}</h2>
+      </div>
+      <div class="rail__nav">
+        <button type="button" class="iconbtn iconbtn--line" data-rail-prev aria-label="Scroll back">{% render 'icon', name: 'arrow-left' %}</button>
+        <button type="button" class="iconbtn iconbtn--line" data-rail-next aria-label="Scroll forward">{% render 'icon', name: 'arrow' %}</button>
+      </div>
+    </div>
+    <div class="filters" data-filter-group>
+      <button type="button" class="chip is-on" data-filter="all">All</button>
+      {%- for c in metaobjects.concern.values -%}
+        <button type="button" class="chip" data-filter="{{ c.system.handle }}" style="--pc:{{ c.colour.value }}">{{ c.short.value }}</button>
+      {%- endfor -%}
+    </div>
+    <div class="rail" data-rail>
+      {%- assign list = section.settings.collection.products | default: collections.all.products -%}
+      {%- for p in list -%}{% render 'product-card', product: p, class: 'rail__item' %}{%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Product rail",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop the range" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Eight formulas. Every dose on the label." },
+    { "type": "collection", "id": "collection", "label": "Collection", "default": "all" }
+  ],
+  "presets": [ { "name": "Product rail" } ]
+}
+{% endschema %}

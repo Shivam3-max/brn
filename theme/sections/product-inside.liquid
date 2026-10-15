@@ -1,0 +1,20 @@
+{%- assign b = product.metafields.brn -%}
+<section class="sec story story--pdp" data-story style="--pc:{{ b.colour.value }}">
+  <div class="wrap">
+    <div class="sec__head sec__head--center rv">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2">{% if b.story.value %}How it works, step by step.{% else %}Open the bottle. Here is what's inside.{% endif %}</h2>
+    </div>
+    <div class="story__grid story__grid--two">
+      <div class="story__stage">{% render 'story-stage', product: product, active: true %}</div>
+      {% render 'story-caption', product: product, hide_buy: true %}
+    </div>
+    <div class="story__bar">
+      <div class="story__segs" data-story-segs></div>
+      <button type="button" class="btn btn--ghost btn--sm" data-story-toggle aria-pressed="false">{% render 'icon', name: 'pause', size: 14 %}<span>Pause</span></button>
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Inside the bottle", "settings": [ { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Inside the bottle" } ], "presets": [ { "name": "Inside the bottle" } ] }
+{% endschema %}

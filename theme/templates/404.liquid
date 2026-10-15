@@ -1,0 +1,10 @@
+<section class="sec nf">
+  <div class="wrap nf__in">
+    <span class="nf__art" data-ink>{% render 'art', key: 'm-root', class: 'ink' %}</span>
+    <p class="eyebrow">404</p>
+    <h1 class="h1">This root didn't lead anywhere.</h1>
+    <p class="sec__sub">The page may have moved. Start from a concern instead:</p>
+    <div class="search__chips">{%- for c in metaobjects.concern.values -%}<a class="chip" href="{{ c.system.url }}" style="--pc:{{ c.colour.value }}">{{ c.short.value }}</a>{%- endfor -%}</div>
+    <a class="btn btn--ink" href="/">Back home</a>
+  </div>
+</section>

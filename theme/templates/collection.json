@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "hero": { "type": "collection-hero" },
+    "check": { "type": "concern-check" },
+    "grid": { "type": "collection-grid" },
+    "stack": { "type": "concern-stack" },
+    "learn": { "type": "concern-learn" }
+  },
+  "order": ["hero", "grid", "check", "stack", "learn"]
+}

@@ -1,0 +1,219 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "label": "Hero banner 1 \u00b7 launch offer",
+            "colour": "#5E8A33",
+            "art": "m-root"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "label": "Hero banner 2 \u00b7 Magnesium + Tulsi",
+            "colour": "#6A5FA8",
+            "art": "i-tulsi"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "label": "Hero banner 3 \u00b7 Gym Stack",
+            "colour": "#C0553A",
+            "art": "i-creatine"
+          }
+        },
+        "slide_4": {
+          "type": "slide",
+          "settings": {
+            "label": "Hero banner 4 \u00b7 Bone & Joint",
+            "colour": "#5F84AA",
+            "art": "c-joint"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3",
+        "slide_4"
+      ]
+    },
+    "trust": {
+      "type": "trust-strip"
+    },
+    "film": {
+      "type": "root-film"
+    },
+    "range": {
+      "type": "product-range"
+    },
+    "story": {
+      "type": "story-player"
+    },
+    "bodymap": {
+      "type": "body-map"
+    },
+    "quiz": {
+      "type": "quiz-section"
+    },
+    "reels": {
+      "type": "reels"
+    },
+    "bare": {
+      "type": "bare-label"
+    },
+    "rtb": {
+      "type": "root-to-bottle",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "art": "j-seed",
+            "title": "Chosen at the root",
+            "text": "Herbs picked for the part that works: kutki root, tulsi leaf, milk thistle seed."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "art": "j-farm",
+            "title": "Grown and sourced",
+            "text": "Himalayan and Indian farms we can name, and minerals in the forms the body absorbs."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "art": "j-extract",
+            "title": "Extracted and standardised",
+            "text": "Extracts measured to a set strength, so every batch carries the same dose."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "art": "j-lab",
+            "title": "Tested, batch by batch",
+            "text": "Identity, purity and heavy metals checked before anything is bottled."
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "art": "j-bottle",
+            "title": "Bottled at Nimai",
+            "text": "Packed in our own GMP facility at Paonta Sahib, with the batch number on every bottle."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5"
+      ]
+    },
+    "stacks": {
+      "type": "stacks"
+    },
+    "experts": {
+      "type": "experts"
+    },
+    "learn": {
+      "type": "learn"
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "q": "Is BRN FSSAI licensed?",
+            "a": "<p>Yes. Every BRN product is made under an FSSAI licence. The licence number is printed on every pack.</p>"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "q": "Where are BRN products made?",
+            "a": "<p>At Nimai Lifesciences, our own manufacturing facility in Paonta Sahib, Himachal Pradesh.</p>"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "q": "Do you offer cash on delivery?",
+            "a": "<p>Yes, across India. Prepaid orders get an extra discount and ship first.</p>"
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "q": "How long does delivery take?",
+            "a": "<p>Usually 3 to 6 working days, depending on your pin code.</p>"
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "q": "Are the products vegetarian?",
+            "a": "<p>Yes. Capsules use vegetarian shells. The mass gainer contains milk protein.</p>"
+          }
+        },
+        "q6": {
+          "type": "qa",
+          "settings": {
+            "q": "Can I take more than one BRN product together?",
+            "a": "<p>Yes. Our stacks are designed to be taken together. If you take regular medication, check with your doctor first.</p>"
+          }
+        },
+        "q7": {
+          "type": "qa",
+          "settings": {
+            "q": "What is Bare Proof?",
+            "a": "<p>Every batch is tested. Type the batch number from your bottle on our Bare Proof page to see that batch\u2019s lab report.</p>"
+          }
+        },
+        "q8": {
+          "type": "qa",
+          "settings": {
+            "q": "What if a product does not suit me?",
+            "a": "<p>Write to us within 7 days of delivery and we will help, including a replacement or refund under our return policy.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "range",
+    "trust",
+    "film",
+    "story",
+    "bodymap",
+    "quiz",
+    "reels",
+    "bare",
+    "rtb",
+    "stacks",
+    "experts",
+    "learn",
+    "faq"
+  ]
+}

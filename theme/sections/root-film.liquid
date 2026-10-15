@@ -1,0 +1,52 @@
+{%- comment -%}
+  The Root Film. A seedling's roots grow down the stage and each tip blooms
+  into one of the launch bottles. Plays by itself when it scrolls into view.
+  Desktop with WebGL: brn-gl.js grows the same roots as 3D tubes and turns
+  the bottles into real 3D objects. Everyone else: the drawn SVG version.
+  Tip positions come from scripts/build-roots.mjs (seeded, fixed).
+{%- endcomment -%}
+{%- liquid
+  assign xw = '7.5,19.6,31.7,43.8,56.3,68.3,80.4,92.5' | split: ','
+  assign yw = '75,57.1,75,58.9,76.8,57.1,75,58.9' | split: ','
+  assign xt = '25,75,25,75,25,75,25,75' | split: ','
+  assign yt = '26,26,47.1,47.1,68.3,68.3,89.4,89.4' | split: ','
+  assign list = section.settings.collection.products | default: collections.all.products
+-%}
+<section class="sec rf" data-rootfilm>
+  <div class="wrap">
+    <div class="sec__head sec__head--center">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="rf__words h2"><span>Bare.</span> <span>Root.</span> <span>Nutrition.</span></h2>
+      <p class="sec__sub">{{ section.settings.sub }}</p>
+    </div>
+    <div class="rf__stage" data-rf-stage>
+      {% render 'root-film-art' %}
+      <div class="rf__gl" data-rf-gl aria-hidden="true"></div>
+      {%- for p in list limit: 8 -%}
+        {%- assign i = forloop.index0 -%}
+        <a class="rf__bottle" href="{{ p.url }}" data-rf-bottle="{{ i }}"
+          style="--pc:{{ p.metafields.brn.colour.value }};--xw:{{ xw[i] }}%;--yw:{{ yw[i] }}%;--xt:{{ xt[i] }}%;--yt:{{ yt[i] }}%;--i:{{ i }}"
+          data-colour="{{ p.metafields.brn.colour.value }}" data-short="{{ p.metafields.brn.short.value | escape }}" data-pack="{{ p.metafields.brn.pack.value }}" data-count="{{ p.metafields.brn.count.value | escape }}">
+          <span class="rf__pack">{% render 'pack-art', product: p %}</span>
+          <span class="rf__name">{{ p.title }}</span>
+          <span class="rf__concern">{{ p.metafields.brn.concern.value.short.value }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+    <div class="rf__foot">
+      <a class="btn btn--ink" href="/collections/all">See the whole range</a>
+      <button type="button" class="btn btn--ghost btn--sm" data-rf-replay>{% render 'icon', name: 'replay', size: 16 %}Replay</button>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Root Film",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The launch range" },
+    { "type": "text", "id": "sub", "label": "Subheading", "default": "Eight formulas grown from one idea: show exactly what's inside." },
+    { "type": "collection", "id": "collection", "label": "Products (first 8)", "default": "all" }
+  ],
+  "presets": [ { "name": "Root Film" } ]
+}
+{% endschema %}

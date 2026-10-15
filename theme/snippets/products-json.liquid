@@ -1,0 +1,19 @@
+{%- comment -%}
+  A small lookup of the launch range for the cart drawer, quiz and reels
+  (colour, pack shape, pairs). BRN sells a short range, so this stays tiny.
+{%- endcomment -%}
+<script type="application/json" id="brn-products">
+{
+{%- for p in collections.all.products -%}
+  {%- assign b = p.metafields.brn -%}
+  {%- assign v = p.selected_or_first_available_variant -%}
+  {{ p.handle | json }}: {
+    "id": {{ p.id }}, "title": {{ p.title | json }}, "url": {{ p.url | json }}, "variant": {{ v.id }},
+    "variants": [{%- for x in p.variants -%}{{ x.id }}{% unless forloop.last %},{% endunless %}{%- endfor -%}],
+    "price": {{ v.price }}, "colour": {{ b.colour.value | json }}, "short": {{ b.short.value | json }},
+    "pack": {{ b.pack.value | json }}, "count": {{ b.count.value | json }}, "tagline": {{ b.tagline.value | json }},
+    "pairs": [{%- for q in b.pairs.value -%}{{ q.handle | json }}{% unless forloop.last %},{% endunless %}{%- endfor -%}]
+  }{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
+}
+</script>

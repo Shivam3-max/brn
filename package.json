@@ -1,0 +1,23 @@
+{
+  "name": "brn-theme",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Custom Shopify Online Store 2.0 theme for BRN · Bare Root Nutrition (Nimai Lifesciences)",
+  "scripts": {
+    "dev": "node scripts/build-art.mjs && node scripts/build-roots.mjs && node dev/server.mjs",
+    "art": "node scripts/build-art.mjs && node scripts/build-roots.mjs",
+    "vendor": "node scripts/vendor.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "shopify:push": "shopify theme push --path theme --unpublished",
+    "shopify:dev": "shopify theme dev --path theme"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "liquidjs": "^10.21.0"
+  },
+  "devDependencies": {
+    "gsap": "3.12.5",
+    "three": "0.160.0"
+  }
+}

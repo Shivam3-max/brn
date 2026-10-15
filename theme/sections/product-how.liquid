@@ -1,0 +1,48 @@
+{%- comment -%} How to take (an animated day clock) and an honest what-to-expect timeline. {%- endcomment -%}
+{%- assign b = product.metafields.brn -%}
+{%- assign how = b.how.value -%}
+{%- assign slots = how.slots | join: ',' -%}
+<section class="sec phow" style="--pc:{{ b.colour.value }}">
+  <div class="wrap">
+    <div class="phow__grid">
+      <div class="clock rv" data-ink>
+        <svg class="clock__svg" viewBox="0 0 240 240" role="img" aria-label="When to take it: {{ how.when | escape }}">
+          <circle class="clock__ring" cx="120" cy="120" r="96"/>
+          {%- for h in (0..23) -%}
+            {%- assign a = h | times: 15 -%}
+            <line class="clock__tick{% if h == 0 or h == 6 or h == 12 or h == 18 %} clock__tick--major{% endif %}" x1="120" y1="28" x2="120" y2="{% if h == 0 or h == 6 or h == 12 or h == 18 %}38{% else %}33{% endif %}" transform="rotate({{ a }} 120 120)"/>
+          {%- endfor -%}
+          <text x="120" y="56" class="clock__lbl">12 am</text><text x="178" y="123" class="clock__lbl">6 am</text><text x="120" y="190" class="clock__lbl">12 pm</text><text x="62" y="123" class="clock__lbl">6 pm</text>
+          {%- comment -%} slots: am 8:00, noon 13:00, pm 20:00, night 22:00 on a 24 h dial (0 at top, clockwise) {%- endcomment -%}
+          <g class="clock__slot{% if slots contains 'am' %} is-on{% endif %}" transform="rotate(120 120 120)"><circle cx="120" cy="24" r="11"/></g>
+          <g class="clock__slot{% if slots contains 'noon' %} is-on{% endif %}" transform="rotate(195 120 120)"><circle cx="120" cy="24" r="11"/></g>
+          <g class="clock__slot{% if slots contains 'pm' %} is-on{% endif %}" transform="rotate(300 120 120)"><circle cx="120" cy="24" r="11"/></g>
+          <g class="clock__slot{% if slots contains 'night' %} is-on{% endif %}" transform="rotate(330 120 120)"><circle cx="120" cy="24" r="11"/></g>
+        </svg>
+        <div class="clock__mid"><span class="clock__icon">{% if slots contains 'night' %}{% render 'art', key: 'c-sleep', class: 'ink' %}{% else %}{% render 'art', key: 'i-d3', class: 'ink' %}{% endif %}</span><b>{{ how.when }}</b></div>
+      </div>
+      <div class="phow__text rv" style="--d:120ms">
+        <p class="eyebrow">How to take it</p>
+        <h2 class="h2">{{ b.serving.value | capitalize }}.</h2>
+        <dl class="phow__dl">
+          <div><dt>When</dt><dd>{{ how.when }}</dd></div>
+          <div><dt>With</dt><dd>{{ how.with }}</dd></div>
+          <div><dt>Tip</dt><dd>{{ how.tip }}</dd></div>
+        </dl>
+        <div class="phow__vid">{% render 'video-slot', video: b.howto_video.value, label: 'How to take it', spec: '9:16 or 1:1 · 10–15 s', ratio: '16/9', colour: b.colour.value, art: 'm-flask' %}</div>
+      </div>
+    </div>
+    <div class="tline rv">
+      <p class="eyebrow">What to expect, honestly</p>
+      <ol class="tline__list">
+        {%- for t in b.timeline.value -%}
+          <li class="tline__item" style="--d:{{ forloop.index0 | times: 120 }}ms"><span class="tline__dot"></span><b>{{ t.w }}</b><span>{{ t.t }}</span></li>
+        {%- endfor -%}
+      </ol>
+      <p class="note">Everyone is different. These are typical experiences, not promises.</p>
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "How to take + timeline", "presets": [ { "name": "How to take + timeline" } ] }
+{% endschema %}

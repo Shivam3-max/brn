@@ -1,0 +1,15 @@
+{%- comment -%} The caption panel the Story Player writes into. Server-renders the product intro. {%- endcomment -%}
+<div class="story__cap" data-story-cap aria-live="polite" style="--cap-pc:{{ product.metafields.brn.colour.value }}">
+  <p class="story__step" data-cap-step>{{ product.metafields.brn.formula.value.size }} key ingredients</p>
+  <h3 class="story__name" data-cap-name>{{ product.title }}</h3>
+  <p class="story__aka" data-cap-aka>{{ product.metafields.brn.tagline.value }}</p>
+  <p class="dose" data-cap-dose hidden></p>
+  <dl class="story__dl">
+    <div data-cap-does-wrap><dt>What it does</dt><dd data-cap-does>{{ product.metafields.brn.made_for.value }}</dd></div>
+    <div data-cap-low-wrap hidden><dt>You may be low if</dt><dd data-cap-low></dd></div>
+  </dl>
+  <a class="story__more" data-cap-link href="{{ product.url }}">See the product {% render 'icon', name: 'arrow', size: 14 %}</a>
+  <div class="story__buy"{% if hide_buy %} hidden{% endif %}>
+    <button type="button" class="btn btn--ink btn--sm" data-cap-add="{{ product.selected_or_first_available_variant.id }}">Add <span data-cap-title>{{ product.title }}</span></button>
+  </div>
+</div>

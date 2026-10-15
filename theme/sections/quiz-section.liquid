@@ -1,0 +1,25 @@
+<section class="sec quizsec{% if section.settings.full %} quizsec--full{% endif %}" id="find-your-brn">
+  <div class="wrap quizsec__grid">
+    <div class="quizsec__intro rv">
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="h2">{{ section.settings.title }}</h2>
+      <p class="sec__sub">{{ section.settings.sub }}</p>
+      <div class="quizsec__art" aria-hidden="true">
+        {% render 'art', key: 'i-tulsi', class: 'ink' %}{% render 'art', key: 'i-magnesium', class: 'ink' %}{% render 'art', key: 'i-milkthistle', class: 'ink' %}
+      </div>
+    </div>
+    <div class="quizsec__box rv">{% render 'quiz' %}</div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Find your BRN quiz",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Find your BRN · 60 seconds" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Three questions. One clear answer." },
+    { "type": "text", "id": "sub", "label": "Subheading", "default": "Tell us your goal, your day and your diet. We'll point you to one product, and tell you why." },
+    { "type": "checkbox", "id": "full", "label": "Full-page layout", "default": false }
+  ],
+  "presets": [ { "name": "Find your BRN quiz" } ]
+}
+{% endschema %}

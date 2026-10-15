@@ -1,0 +1,136 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "BRN Root",
+    "theme_version": "0.1.0",
+    "theme_author": "Built for Bare Root Nutrition",
+    "theme_documentation_url": "https://shopify.dev/docs/themes",
+    "theme_support_url": "https://help.shopify.com"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo",
+        "info": "Leave empty to use the built-in BRN logo."
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width",
+        "min": 60,
+        "max": 180,
+        "step": 2,
+        "unit": "px",
+        "default": 96
+      },
+      {
+        "type": "color",
+        "id": "colour_ink",
+        "label": "Ink (text) colour",
+        "default": "#403322"
+      },
+      {
+        "type": "color",
+        "id": "colour_accent",
+        "label": "Accent colour",
+        "default": "#4F6F3A"
+      }
+    ]
+  },
+  {
+    "name": "Store",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "announcements",
+        "label": "Announcement messages",
+        "info": "One message per line. Add a link after a | e.g. Free delivery above ₹799|/collections/all"
+      },
+      {
+        "type": "number",
+        "id": "free_ship_threshold",
+        "label": "Free delivery above (₹)",
+        "default": 799
+      },
+      {
+        "type": "checkbox",
+        "id": "show_placeholders",
+        "label": "Show placeholder labels",
+        "info": "Labels empty banner, video and photo slots with their size. Turn off at launch.",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Contact & legal",
+    "settings": [
+      {
+        "type": "text",
+        "id": "phone",
+        "label": "Phone"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp",
+        "label": "WhatsApp number",
+        "info": "Country code and number, no spaces, e.g. 919876543210"
+      },
+      {
+        "type": "text",
+        "id": "email",
+        "label": "Email"
+      },
+      {
+        "type": "textarea",
+        "id": "address",
+        "label": "Registered address"
+      },
+      {
+        "type": "text",
+        "id": "fssai",
+        "label": "FSSAI licence number"
+      },
+      {
+        "type": "text",
+        "id": "legal_line",
+        "label": "Marketed / manufactured by",
+        "default": "Marketed and manufactured by Nimai Lifesciences, Paonta Sahib, Himachal Pradesh"
+      }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      {
+        "type": "url",
+        "id": "instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "youtube",
+        "label": "YouTube"
+      },
+      {
+        "type": "url",
+        "id": "facebook",
+        "label": "Facebook"
+      }
+    ]
+  },
+  {
+    "name": "Motion",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_webgl",
+        "label": "3D (WebGL) scenes on capable desktops",
+        "info": "Phones, slow devices and visitors who prefer reduced motion always get the drawn version.",
+        "default": true
+      }
+    ]
+  }
+]

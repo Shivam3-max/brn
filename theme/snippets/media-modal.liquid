@@ -1,0 +1,8 @@
+{%- comment -%} One modal for every video and reel. theme.js fills it from the clicked card's data. {%- endcomment -%}
+<div class="mmodal" data-panel="media" role="dialog" aria-modal="true" aria-label="Video" hidden>
+  <button type="button" class="iconbtn mmodal__close" data-close aria-label="Close video">{% render 'icon', name: 'close' %}</button>
+  <div class="mmodal__inner">
+    <div class="mmodal__stage" data-media-stage></div>
+    <aside class="mmodal__side" data-media-side></aside>
+  </div>
+</div>
