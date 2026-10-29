@@ -1,0 +1,32 @@
+{%- comment -%} Why BRN, modelled on getmymettle.com's "Our USP": four icon-led promises. {%- endcomment -%}
+<section class="sec usp">
+  <div class="wrap">
+    <h2 class="ruled ruled--dark">{{ section.settings.heading }}</h2>
+    <div class="usp__grid">
+      {%- for block in section.blocks -%}
+        <div class="usp__item" {{ block.shopify_attributes }}>
+          <span class="usp__icon">{% render 'art', key: block.settings.icon %}</span>
+          <h3 class="usp__t">{{ block.settings.title }}</h3>
+          <p class="usp__d">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Why BRN",
+  "settings": [ { "type": "text", "id": "heading", "label": "Heading", "default": "Why BRN" } ],
+  "blocks": [ { "type": "item", "name": "Promise", "settings": [
+    { "type": "text", "id": "icon", "label": "Icon key", "default": "m-shield" },
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "textarea", "id": "text", "label": "Text" }
+  ] } ],
+  "presets": [ { "name": "Why BRN", "blocks": [
+    { "type": "item", "settings": { "icon": "m-factory", "title": "Made in our own plant", "text": "Every BRN product is made by Nimai Lifesciences in Paonta Sahib, not outsourced." } },
+    { "type": "item", "settings": { "icon": "m-flask", "title": "Every batch tested", "text": "Identity, strength and purity checked before a single bottle ships." } },
+    { "type": "item", "settings": { "icon": "m-proof", "title": "Every dose on the label", "text": "No proprietary blends. You see exactly what you take, and how much." } },
+    { "type": "item", "settings": { "icon": "m-cash", "title": "Honest prices", "text": "Factory to your door, with cash on delivery across India." } }
+  ] } ]
+}
+{% endschema %}

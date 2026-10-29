@@ -405,3 +405,16 @@ body.is-locked { overflow: hidden; }
 /* grid containers that hold form fields: never let an input's intrinsic width widen the column */
 .proof, .bare__intro, .plabel__side, .quiz, .ccheck__box, .builder__sum { grid-template-columns: minmax(0, 1fr); }
 .proof__field input { width: 100%; }
+
+/* ---------- phone bottom bar (as on getmymettle.com) ---------- */
+.mbar { display: none; }
+@media (max-width: 760px) {
+  .mbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-template-columns: repeat(4, 1fr); background: #fff; border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom, 0px); box-shadow: 0 -6px 20px -14px rgba(64, 51, 34, .35); }
+  .mbar__i { position: relative; display: grid; justify-items: center; gap: 3px; padding: 9px 0 8px; font: 600 11.5px/1 var(--f-body); color: var(--ink); }
+  .mbar__i .icon { width: 22px; height: 22px; }
+  .mbar__n { position: absolute; top: 4px; left: calc(50% + 6px); min-width: 17px; height: 17px; padding-inline: 4px; border-radius: 999px; background: var(--ink); color: #fff; font: 700 10px/17px var(--f-body); text-align: center; }
+  body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
+  .wa-fab { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  .satc { bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
+  .toast { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+}

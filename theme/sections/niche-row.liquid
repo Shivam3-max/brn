@@ -1,0 +1,58 @@
+{%- comment -%}
+  One row per niche, modelled on ruleoneproteins.com: a product carousel on one
+  side, an angled panel on the other playing a short muted video loop, with the
+  niche name set large across it and a "Shop our…" button.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign coll = s.collection -%}
+<section class="niche niche--{{ s.side }}" style="--nc:{{ s.colour }}">
+  <div class="niche__in">
+    <div class="niche__main">
+      <h2 class="uhead">{{ s.heading }}</h2>
+      <div class="niche__railwrap">
+        <button type="button" class="rarrow rarrow--prev" data-rail-prev aria-label="Previous products">{% render 'icon', name: 'arrow-left', size: 20 %}</button>
+        <div class="rail niche__rail" data-rail>
+          {%- for p in coll.products limit: s.limit -%}{% render 'rcard', product: p %}{%- endfor -%}
+        </div>
+        <button type="button" class="rarrow rarrow--next" data-rail-next aria-label="More products">{% render 'icon', name: 'arrow', size: 20 %}</button>
+      </div>
+      <div class="rdots" data-rail-dots aria-hidden="true"></div>
+    </div>
+    <aside class="niche__panel">
+      <div class="niche__media">
+        {%- if s.video != blank -%}
+          {{ s.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', class: 'niche__video' }}
+        {%- elsif s.image != blank -%}
+          <img src="{{ s.image | image_url: width: 1000 }}" alt="" loading="lazy" class="niche__video">
+        {%- else -%}
+          <div class="niche__ph" aria-hidden="true">
+            {%- for p in coll.products limit: 3 -%}<span class="niche__phpack niche__phpack--{{ forloop.index }}">{% render 'pack-art', product: p %}</span>{%- endfor -%}
+          </div>
+          {%- if settings.show_placeholders -%}<span class="niche__phlabel">5–10 s video loop · 9:16 or 4:5 · muted · upload in Theme editor</span>{%- endif -%}
+        {%- endif -%}
+      </div>
+      <span class="niche__chev" aria-hidden="true"><svg viewBox="0 0 80 40"><path d="M38 0 L0 20 L38 40 Z M78 0 L40 20 L78 40 Z"/></svg></span>
+      <div class="niche__copy">
+        <p class="niche__word">{{ s.word }}</p>
+        <a class="niche__cta" href="{{ coll.url | default: '/collections/all' }}">{{ s.button }}</a>
+      </div>
+    </aside>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Niche row",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find your strength partner" },
+    { "type": "text", "id": "word", "label": "Big word on the video", "default": "Sports" },
+    { "type": "text", "id": "button", "label": "Button label", "default": "Shop Sports Nutrition" },
+    { "type": "collection", "id": "collection", "label": "Products from" },
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "video", "id": "video", "label": "Video loop", "info": "5–10 s, muted, portrait (9:16 or 4:5), under 6 MB." },
+    { "type": "image_picker", "id": "image", "label": "Or a photo instead" },
+    { "type": "color", "id": "colour", "label": "Panel colour (shown until a video is added)", "default": "#2B2219" },
+    { "type": "select", "id": "side", "label": "Video side", "default": "right", "options": [ { "value": "right", "label": "Right" }, { "value": "left", "label": "Left" } ] }
+  ],
+  "presets": [ { "name": "Niche row" } ]
+}
+{% endschema %}

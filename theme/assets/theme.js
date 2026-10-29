@@ -277,8 +277,26 @@ function initSliders() {
 function initRails() {
   $$('[data-rail]').forEach((rail) => {
     const sec = rail.closest('section') || document;
-    $('[data-rail-next]', sec)?.addEventListener('click', () => rail.scrollBy({ left: rail.clientWidth * 0.8, behavior: 'smooth' }));
-    $('[data-rail-prev]', sec)?.addEventListener('click', () => rail.scrollBy({ left: -rail.clientWidth * 0.8, behavior: 'smooth' }));
+    const next = $('[data-rail-next]', sec), prev = $('[data-rail-prev]', sec), dots = $('[data-rail-dots]', sec);
+    next?.addEventListener('click', () => rail.scrollBy({ left: rail.clientWidth * 0.8, behavior: 'smooth' }));
+    prev?.addEventListener('click', () => rail.scrollBy({ left: -rail.clientWidth * 0.8, behavior: 'smooth' }));
+    /* arrows grey out at the ends; dots show one dot per screenful */
+    const sync = () => {
+      const max = rail.scrollWidth - rail.clientWidth - 2;
+      if (prev) prev.disabled = rail.scrollLeft <= 2;
+      if (next) next.disabled = rail.scrollLeft >= max;
+      if (!dots) return;
+      const pages = Math.max(1, Math.ceil(rail.scrollWidth / rail.clientWidth - 0.05));
+      if (dots.children.length !== pages) {
+        dots.innerHTML = pages > 1 ? Array.from({ length: pages }, (_, k) => `<button type="button" aria-label="Page ${k + 1}"></button>`).join('') : '';
+        [...dots.children].forEach((d, k) => d.addEventListener('click', () => rail.scrollTo({ left: Math.min(k * rail.clientWidth, max + 2), behavior: 'smooth' })));
+      }
+      const at = max <= 0 ? 0 : Math.round((rail.scrollLeft / (max + 2)) * (pages - 1));
+      [...dots.children].forEach((d, k) => d.classList.toggle('is-on', k === at));
+    };
+    rail.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
   });
   $$('[data-filter-group]').forEach((group) => {
     const sec = group.closest('section') || document;

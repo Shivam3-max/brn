@@ -36,6 +36,7 @@ function chrome(html, where) {
   check(`${where} · cart drawer`, count(html, /data-panel="cart"/g), 1);
   check(`${where} · search overlay`, count(html, /data-panel="search"/g), 1);
   check(`${where} · product lookup json`, count(html, /id="brn-products"/g), 1);
+  check(`${where} · phone bottom bar`, count(html, /class="mbar__i"/g), 4);
   check(`${where} · disclaimer`, count(html, /not intended to diagnose/g), gte(1));
 }
 
@@ -49,25 +50,21 @@ const run = async () => {
     check('home · no concern tiles', count(h, /class="ctile /g), 0);
     const order = [...h.matchAll(/id="shopify-section-([^"]+)"/g)].map((m) => m[1]).filter((k) => !['announcement-bar', 'header', 'footer'].includes(k));
     check('home · shop the range is 2nd section', order[1], 'range');
-    check('home · root film bottles', count(h, /data-rf-bottle=/g), 8);
-    check('home · root film wide + tall svg', count(h, /class="rf__svg rf__svg--/g), 2);
-    check('home · root geometry json', count(h, /data-rf-geo/g), 1);
-    check('home · product cards', count(h, /class="pcard /g), gte(8));
-    check('home · story stages', count(h, /data-stage="/g), 8);
-    check('home · story nodes (7+5+5+3+4+4+5+5)', count(h, /class="stage__node"/g), 38);
-    check('home · body map hotspots', count(h, /class="hot/g), gte(14));
-    check('home · body map cards', count(h, /data-zone-card=/g), 7);
-    check('home · quiz questions', count(h, /data-quiz-step=/g), 3);
-    check('home · quiz options', count(h, /class="quiz__opt"/g), 15);
+    check('home · section order', order.join(','), 'hero,range,niche_sports,goals,niche_daily,niche_ayurveda,reels,usp,quality,stacks,insta,faq');
+    check('home · no root film / story / body map / quiz', count(h, /data-rf-bottle=|data-stage="|data-zone-card=|data-quiz-step=/g), 0);
+    check('home · range cards', count(h, /class="pcard /g), gte(8));
+    check('home · 3 niche rows', count(h, /<section class="niche niche--/g), 3);
+    check('home · niche product cards (5 + 4 + 4)', count(h, /<article class="rcard"/g), 13);
+    check('home · choose-options buttons', count(h, /class="rbtn" href="\/products\//g), 13);
+    check('home · niche words', count(h, /class="niche__word">(Sports|Daily|Ayurveda)</g), 3);
+    check('home · niche shop buttons', count(h, /class="niche__cta" href="\/collections\/(sports-nutrition|daily-wellness|ayurveda)"/g), 3);
+    check('home · goals', count(h, /<a class="goal"/g), 6);
+    check('home · why BRN items', count(h, /class="usp__item"/g), 4);
+    check('home · quality band', count(h, /class="qband__h"/g), 1);
     check('home · reels', count(h, /data-reel/g), 8);
-    check('home · label panels', count(h, /data-label-panel=/g), 8);
-    check('home · proof form', count(h, /data-proof /g), gte(1));
-    check('home · root to bottle steps', count(h, /class="rtb__step /g), 5);
     check('home · stacks', count(h, /class="stack"/g), 3);
-    check('home · expert answers', count(h, /<article class="xcard /g), 4);
-    check('home · articles', count(h, /<article class="acard /g), 3);
+    check('home · instagram tiles', count(h, /class="insta__tile"/g), 6);
     check('home · faq', count(h, /<details class="qa/g), 8);
-    check('home · line drawings', count(h, /class="art /g), gte(150));
   }
 
   /* ---------------- products ---------------- */

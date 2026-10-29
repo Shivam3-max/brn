@@ -1,0 +1,23 @@
+{%- comment -%}
+  Plain product card, modelled on ruleoneproteins.com: pack, upper-case name,
+  one-line type, "From" price, how many options, one clear button.
+  {% render 'rcard', product: p %}
+{%- endcomment -%}
+{%- liquid
+  assign b = product.metafields.brn
+  assign n = product.variants.size
+-%}
+<article class="rcard" style="--pc:{{ b.colour.value }}">
+  <a class="rcard__img" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+    {%- if product.featured_image -%}
+      <img src="{{ product.featured_image | image_url: width: 500 }}" alt="" loading="lazy" width="500" height="500">
+    {%- else -%}
+      {% render 'pack-art', product: product %}
+    {%- endif -%}
+  </a>
+  <h3 class="rcard__t"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+  <p class="rcard__s">{{ b.format.value }} · {{ b.count.value }}</p>
+  <p class="rcard__p">{% if n > 1 %}From {% endif %}{{ product.price_min | money }}</p>
+  <p class="rcard__v">{% if n > 1 %}Available in {{ n }} sizes{% else %}One size{% endif %}</p>
+  <a class="rbtn" href="{{ product.url }}">Choose options</a>
+</article>

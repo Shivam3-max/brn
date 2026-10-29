@@ -1,0 +1,37 @@
+{%- assign s = section.settings -%}
+{%- assign url = settings.instagram | default: 'https://instagram.com' -%}
+<section class="sec insta">
+  <div class="wrap">
+    <div class="insta__head">
+      <h2 class="uhead">{{ s.handle }}</h2>
+      <a class="rbtn rbtn--ghost" href="{{ url }}" target="_blank" rel="noopener">{{ s.button }}</a>
+    </div>
+    <div class="insta__grid">
+      {%- for block in section.blocks -%}
+        {%- assign p = collections.all.products[forloop.index0] -%}
+        <a class="insta__tile" href="{{ url }}" target="_blank" rel="noopener" style="--pc:{{ p.metafields.brn.colour.value }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image -%}
+            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.alt | escape }}" loading="lazy">
+          {%- else -%}
+            <span class="insta__ph">{% render 'pack-art', product: p %}</span>
+          {%- endif -%}
+          <span class="insta__ig">{% render 'icon', name: 'instagram', size: 22 %}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Instagram grid",
+  "settings": [
+    { "type": "text", "id": "handle", "label": "Heading", "default": "@bareroot.nutrition" },
+    { "type": "text", "id": "button", "label": "Button", "default": "Follow BRN on Instagram" }
+  ],
+  "blocks": [ { "type": "tile", "name": "Photo", "limit": 6, "settings": [
+    { "type": "image_picker", "id": "image", "label": "Photo (square)" },
+    { "type": "text", "id": "alt", "label": "Describe the photo" }
+  ] } ],
+  "presets": [ { "name": "Instagram grid", "blocks": [ { "type": "tile" }, { "type": "tile" }, { "type": "tile" }, { "type": "tile" }, { "type": "tile" }, { "type": "tile" } ] } ]
+}
+{% endschema %}

@@ -1,0 +1,32 @@
+{%- comment -%} Brand promise band, modelled on ruleoneproteins.com "Quality is Rule 1". {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="qband">
+  <div class="qband__bg" aria-hidden="true">
+    {%- if s.video != blank -%}
+      {{ s.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', class: 'qband__media' }}
+    {%- elsif s.image != blank -%}
+      <img class="qband__media" src="{{ s.image | image_url: width: 1920 }}" alt="" loading="lazy">
+    {%- else -%}
+      <div class="qband__ph">{%- for p in collections.all.products limit: 5 -%}<span>{% render 'pack-art', product: p %}</span>{%- endfor -%}</div>
+    {%- endif -%}
+  </div>
+  <div class="qband__in wrap">
+    <h2 class="qband__h">{{ s.heading }}</h2>
+    <p class="qband__p">{{ s.text }}</p>
+    <a class="qband__cta" href="{{ s.link }}">{{ s.button }}</a>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Quality band",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Bare is our rule. Honest value is the result." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "BRN is one of the few nutrition brands that makes every formula it sells. Nimai Lifesciences controls each step in our own facility at Paonta Sahib: sourcing the ingredients, blending, packing and testing every batch before it leaves. Nothing is left to chance, and making it ourselves is also how we keep prices honest." },
+    { "type": "text", "id": "button", "label": "Button", "default": "Learn about our quality" },
+    { "type": "url", "id": "link", "label": "Button link", "default": "/pages/our-story" },
+    { "type": "image_picker", "id": "image", "label": "Background photo", "info": "1920 × 700 px. Darkened automatically." },
+    { "type": "video", "id": "video", "label": "Or a background video loop" }
+  ],
+  "presets": [ { "name": "Quality band" } ]
+}
+{% endschema %}

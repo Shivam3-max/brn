@@ -6,7 +6,7 @@
         "slide_1": {
           "type": "slide",
           "settings": {
-            "label": "Hero banner 1 \u00b7 launch offer",
+            "label": "Hero banner 1 · launch offer",
             "colour": "#5E8A33",
             "art": "m-root"
           }
@@ -14,7 +14,7 @@
         "slide_2": {
           "type": "slide",
           "settings": {
-            "label": "Hero banner 2 \u00b7 Magnesium + Tulsi",
+            "label": "Hero banner 2 · Magnesium + Tulsi",
             "colour": "#6A5FA8",
             "art": "i-tulsi"
           }
@@ -22,7 +22,7 @@
         "slide_3": {
           "type": "slide",
           "settings": {
-            "label": "Hero banner 3 \u00b7 Gym Stack",
+            "label": "Hero banner 3 · Gym Stack",
             "colour": "#C0553A",
             "art": "i-creatine"
           }
@@ -30,7 +30,7 @@
         "slide_4": {
           "type": "slide",
           "settings": {
-            "label": "Hero banner 4 \u00b7 Bone & Joint",
+            "label": "Hero banner 4 · Bone & Joint",
             "colour": "#5F84AA",
             "art": "c-joint"
           }
@@ -43,90 +43,199 @@
         "slide_4"
       ]
     },
-    "trust": {
-      "type": "trust-strip"
-    },
-    "film": {
-      "type": "root-film"
-    },
     "range": {
       "type": "product-range"
     },
-    "story": {
-      "type": "story-player"
+    "niche_sports": {
+      "type": "niche-row",
+      "settings": {
+        "heading": "Find your strength partner",
+        "word": "Sports",
+        "button": "Shop Sports Nutrition",
+        "collection": "sports-nutrition",
+        "colour": "#2B2219",
+        "side": "right"
+      }
     },
-    "bodymap": {
-      "type": "body-map"
-    },
-    "quiz": {
-      "type": "quiz-section"
-    },
-    "reels": {
-      "type": "reels"
-    },
-    "bare": {
-      "type": "bare-label"
-    },
-    "rtb": {
-      "type": "root-to-bottle",
+    "goals": {
+      "type": "goal-band",
       "blocks": {
-        "step_1": {
-          "type": "step",
+        "goal_1": {
+          "type": "goal",
           "settings": {
-            "art": "j-seed",
-            "title": "Chosen at the root",
-            "text": "Herbs picked for the part that works: kutki root, tulsi leaf, milk thistle seed."
+            "title": "Muscle & Strength",
+            "icon": "c-strength",
+            "link": "/collections/strength-muscle"
           }
         },
-        "step_2": {
-          "type": "step",
+        "goal_2": {
+          "type": "goal",
           "settings": {
-            "art": "j-farm",
-            "title": "Grown and sourced",
-            "text": "Himalayan and Indian farms we can name, and minerals in the forms the body absorbs."
+            "title": "Healthy Weight Gain",
+            "icon": "s-underweight",
+            "link": "/collections/strength-muscle"
           }
         },
-        "step_3": {
-          "type": "step",
+        "goal_3": {
+          "type": "goal",
           "settings": {
-            "art": "j-extract",
-            "title": "Extracted and standardised",
-            "text": "Extracts measured to a set strength, so every batch carries the same dose."
+            "title": "Daily Energy",
+            "icon": "c-immunity",
+            "link": "/collections/daily-energy-immunity"
           }
         },
-        "step_4": {
-          "type": "step",
+        "goal_4": {
+          "type": "goal",
           "settings": {
-            "art": "j-lab",
-            "title": "Tested, batch by batch",
-            "text": "Identity, purity and heavy metals checked before anything is bottled."
+            "title": "Liver & Detox",
+            "icon": "c-liver",
+            "link": "/collections/liver-care"
           }
         },
-        "step_5": {
-          "type": "step",
+        "goal_5": {
+          "type": "goal",
           "settings": {
-            "art": "j-bottle",
-            "title": "Bottled at Nimai",
-            "text": "Packed in our own GMP facility at Paonta Sahib, with the batch number on every bottle."
+            "title": "Joints & Bones",
+            "icon": "c-joint",
+            "link": "/collections/joint-comfort"
+          }
+        },
+        "goal_6": {
+          "type": "goal",
+          "settings": {
+            "title": "Sleep & Stress",
+            "icon": "c-sleep",
+            "link": "/collections/sleep-stress"
           }
         }
       },
       "block_order": [
-        "step_1",
-        "step_2",
-        "step_3",
-        "step_4",
-        "step_5"
+        "goal_1",
+        "goal_2",
+        "goal_3",
+        "goal_4",
+        "goal_5",
+        "goal_6"
       ]
     },
+    "niche_daily": {
+      "type": "niche-row",
+      "settings": {
+        "heading": "Fill the daily gaps",
+        "word": "Daily",
+        "button": "Shop Daily Wellness",
+        "collection": "daily-wellness",
+        "colour": "#1F3B36",
+        "side": "right"
+      }
+    },
+    "niche_ayurveda": {
+      "type": "niche-row",
+      "settings": {
+        "heading": "Rooted in Ayurveda",
+        "word": "Ayurveda",
+        "button": "Shop Ayurveda",
+        "collection": "ayurveda",
+        "colour": "#2E3A1F",
+        "side": "right"
+      }
+    },
+    "reels": {
+      "type": "reels",
+      "settings": {
+        "eyebrow": "Watch & shop",
+        "title": "Experts' choice"
+      }
+    },
+    "usp": {
+      "type": "usp-row",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "m-factory",
+            "title": "Made in our own plant",
+            "text": "Every BRN product is made by Nimai Lifesciences in Paonta Sahib, not outsourced."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "m-flask",
+            "title": "Every batch tested",
+            "text": "Identity, strength and purity checked before a single bottle ships."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "m-proof",
+            "title": "Every dose on the label",
+            "text": "No proprietary blends. You see exactly what you take, and how much."
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "icon": "m-cash",
+            "title": "Honest prices",
+            "text": "Factory to your door, with cash on delivery across India."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ]
+    },
+    "quality": {
+      "type": "quality-band"
+    },
     "stacks": {
-      "type": "stacks"
+      "type": "stacks",
+      "settings": {
+        "eyebrow": "Super saver combos",
+        "title": "Better together, and cheaper too."
+      }
     },
-    "experts": {
-      "type": "experts"
-    },
-    "learn": {
-      "type": "learn"
+    "insta": {
+      "type": "insta-grid",
+      "blocks": {
+        "tile_1": {
+          "type": "tile",
+          "settings": {}
+        },
+        "tile_2": {
+          "type": "tile",
+          "settings": {}
+        },
+        "tile_3": {
+          "type": "tile",
+          "settings": {}
+        },
+        "tile_4": {
+          "type": "tile",
+          "settings": {}
+        },
+        "tile_5": {
+          "type": "tile",
+          "settings": {}
+        },
+        "tile_6": {
+          "type": "tile",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "tile_1",
+        "tile_2",
+        "tile_3",
+        "tile_4",
+        "tile_5",
+        "tile_6"
+      ]
     },
     "faq": {
       "type": "faq",
@@ -177,7 +286,7 @@
           "type": "qa",
           "settings": {
             "q": "What is Bare Proof?",
-            "a": "<p>Every batch is tested. Type the batch number from your bottle on our Bare Proof page to see that batch\u2019s lab report.</p>"
+            "a": "<p>Every batch is tested. Type the batch number from your bottle on our Bare Proof page to see that batch’s lab report.</p>"
           }
         },
         "q8": {
@@ -203,17 +312,15 @@
   "order": [
     "hero",
     "range",
-    "trust",
-    "film",
-    "story",
-    "bodymap",
-    "quiz",
+    "niche_sports",
+    "goals",
+    "niche_daily",
+    "niche_ayurveda",
     "reels",
-    "bare",
-    "rtb",
+    "usp",
+    "quality",
     "stacks",
-    "experts",
-    "learn",
+    "insta",
     "faq"
   ]
 }

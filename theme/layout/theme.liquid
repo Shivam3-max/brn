@@ -92,6 +92,12 @@
   {% render 'search-overlay' %}
   {% render 'media-modal' %}
   {% render 'products-json' %}
+  <nav class="mbar" aria-label="Quick links">
+    <a class="mbar__i" href="/collections/all">{% render 'icon', name: 'grid' %}<span>Shop</span></a>
+    <button type="button" class="mbar__i" data-open="cart">{% render 'icon', name: 'bag' %}<span>Cart</span><span class="mbar__n" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span></button>
+    <a class="mbar__i" href="{{ routes.account_url }}">{% render 'icon', name: 'user' %}<span>Account</span></a>
+    <button type="button" class="mbar__i" data-open="search">{% render 'icon', name: 'search' %}<span>Search</span></button>
+  </nav>
   <div class="scrim" data-scrim hidden></div>
   <div class="toast" data-toast role="status" aria-live="polite" hidden></div>
 

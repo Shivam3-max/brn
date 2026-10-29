@@ -488,6 +488,7 @@ export const signText = {
 
 /* ------------------------------------------------- header tab ranges */
 export const ranges = [
+  { handle: 'daily-wellness', title: 'Daily Wellness', line: 'The everyday basics: vitamins, minerals and a settled gut.', products: ['multivitamin-multimineral', 'calcium-magnesium-d3', 'gut-health', 'magnesium-tulsi'] },
   { handle: 'sports-nutrition', title: 'Sports Nutrition', line: 'Strength, size and recovery, with every dose on the label.', products: ['creatine', 'mass-gainer', 'magnesium-tulsi', 'joint-support', 'multivitamin-multimineral'] },
   { handle: 'ayurveda', title: 'Ayurveda', line: 'Classic herbs, dosed and tested: tulsi, kutki, triphala, shallaki and more.', products: ['liver-detox', 'gut-health', 'magnesium-tulsi', 'joint-support'] },
 ];
